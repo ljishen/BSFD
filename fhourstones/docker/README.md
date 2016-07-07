@@ -1,0 +1,1 @@
+# The Fhourstones Benchmark (version 3.1)#### Usage```bashdocker run --rm -t ljishen/fhourstones```See [Home Page](https://tromp.github.io/c4/fhour.html) of The Fhourstones benchmark for more details.
