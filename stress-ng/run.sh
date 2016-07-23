@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -x
 
 if [ "$#" -ne 2 ]; then
     cat <<-ENDOFMESSAGE
@@ -35,7 +35,7 @@ fi
 mkdir -p $(dirname $1)
 
 if [ -z "$BENCHMARKS" ] ; then
-  BENCHMARKS="cpu-methods cpu-class cpu-cache memory matrix-methods string-methods"
+  BENCHMARKS="cpu-methods matrix-methods string-methods class_cpu class_cpu-cache class_memory"
 fi
 
 if [ -z $NUM_WORKERS ] ; then
@@ -74,16 +74,16 @@ category="foo"
 
 remote_user_at_host="$2"
 
-scp yaml2json.py $remote_user_at_host:/tmp/yaml2json.py &> /dev/null
+scp yaml2json.py $remote_user_at_host:/tmp/yaml2json.py > stress-ng.log 2>&1
 
 echo "[" | tee "$1"
 
 for bench in $BENCHMARKS ; do
   if [[ $bench == "cpu-methods" ]] ; then
     include_comma "$1"
-    for method in ackermann bitops callfunc cdouble cfloat clongdouble correlate crc16 decimal32 decimal64 decimal128 dither djb2a double euler explog fft fibonacci float fnv1a gamma gcd gray hamming hanoi hyperbolic idct int128 int64 int32 int16 int8 int128float int128double int128longdouble int128decimal32 int128decimal64 int128decimal128 int64float int64double int64longdouble int32float int32double int32longdouble jenkin jmp ln2 longdouble loop matrixprod nsqrt omega parity phi pi pjw prime psi queens rand rand48 rgb sdbm sieve sqrt trig union zeta ; do
-       $FOLDER_NAME/stress-ng --cpu-method $method --cpu $COMMON &> /dev/null
-       scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+    for method in ackermann bitops callfunc cdouble cfloat clongdouble correlate crc16 dither djb2a double euler explog fft fibonacci float fnv1a gamma gcd gray hamming hanoi hyperbolic idct int128 int64 int32 int16 int8 int128float int128double int128longdouble int64float int64double int64longdouble int32float int32double int32longdouble jenkin jmp ln2 longdouble loop matrixprod nsqrt omega parity phi pi pjw prime psi queens rand rand48 rgb sdbm sieve sqrt trig union zeta ; do
+       $FOLDER_NAME/stress-ng --cpu-method $method --cpu $COMMON >> stress-ng.log 2>&1
+       scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
        ssh $remote_user_at_host "/tmp/yaml2json.py cpu $method" | tee -a "$1"
        if [ "$method" != "zeta" ] ; then
          # print comma for all but the last (zeta)
@@ -92,9 +92,9 @@ for bench in $BENCHMARKS ; do
     done
   elif [[ $bench == "matrix-methods" ]] ; then
     include_comma "$1"
-    for method in add div frobenius mult prod sub hadamard trans ; do
-       $FOLDER_NAME/stress-ng --matrix-method $method --matrix $COMMON &> /dev/null
-       scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+    for method in add copy div frobenius hadamard mean mult prod sub trans ; do
+       $FOLDER_NAME/stress-ng --matrix-method $method --matrix $COMMON >> stress-ng.log 2>&1
+       scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
        ssh $remote_user_at_host "/tmp/yaml2json.py matrix $method" | tee -a "$1"
        if [ "$method" != "trans" ] ; then
          echo "," | tee -a "$1"
@@ -103,34 +103,34 @@ for bench in $BENCHMARKS ; do
   elif [[ $bench == "string-methods" ]] ; then
     include_comma "$1"
     for method in index rindex strcasecmp strcat strchr strcoll strcmp strcpy strlen strncasecmp strncat strncmp strrchr strxfrm ; do
-       $FOLDER_NAME/stress-ng --str-method $method --str $COMMON &> /dev/null
-       scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+       $FOLDER_NAME/stress-ng --str-method $method --str $COMMON >> stress-ng.log 2>&1
+       scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
        ssh $remote_user_at_host "/tmp/yaml2json.py string $method" | tee -a "$1"
        if [ "$method" != "strxfrm" ] ; then
          echo "," | tee -a "$1"
        fi
     done
-  elif [[ $bench == "cpu-class" ]] ; then
+  elif [[ $bench == "class_cpu" ]] ; then
     include_comma "$1"
-    $FOLDER_NAME/stress-ng --class cpu --exclude matrix,context --sequential $COMMON &> /dev/null
-    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+    $FOLDER_NAME/stress-ng --class cpu --exclude matrix,context,atomic --sequential $COMMON >> stress-ng.log 2>&1
+    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
     ssh $remote_user_at_host "/tmp/yaml2json.py cpu" | tee -a "$1"
-  elif [[ $bench == "memory" ]] ; then
+  elif [[ $bench == "class_memory" ]] ; then
     include_comma "$1"
-    $FOLDER_NAME/stress-ng --class memory --exclude bsearch,hsearch,lsearch,qsort,wcs,tsearch,stream,numa --sequential $COMMON &> /dev/null
-    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+    $FOLDER_NAME/stress-ng --class memory --exclude bsearch,hsearch,lsearch,qsort,wcs,tsearch,stream,numa,atomic,str --sequential $COMMON >> stress-ng.log 2>&1
+    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
     ssh $remote_user_at_host "/tmp/yaml2json.py memory" | tee -a "$1"
-  elif [[ $bench == "cpu-cache" ]] ; then
+  elif [[ $bench == "class_cpu-cache" ]] ; then
     include_comma "$1"
-    $FOLDER_NAME/stress-ng --class cpu-cache --exclude bsearch,hsearch,lockbus,lsearch,vecmath,matrix,qsort,malloc,str,stream,memcpy,wcs,tsearch --sequential $COMMON &> /dev/null
-    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+    $FOLDER_NAME/stress-ng --class cpu-cache --exclude bsearch,hsearch,lsearch,matrix,qsort,malloc,str,stream,memcpy,wcs,tsearch,af-alg,cpu,crypt,longjmp,numa,opcode,qsort,vecmath,lockbus --sequential $COMMON >> stress-ng.log 2>&1
+    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
     ssh $remote_user_at_host "/tmp/yaml2json.py cpu-cache" | tee -a "$1"
   else
     # if we didn't get "special" id, then we assume it's a regular stressor
     include_comma "$1"
-    $FOLDER_NAME/stress-ng "--$bench" $COMMON &> /dev/null
+    $FOLDER_NAME/stress-ng "--$bench" $COMMON >> stress-ng.log 2>&1
     get_category $bench
-    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE &> /dev/null
+    scp $STRESS_NG_OUTPUT_FILE $remote_user_at_host:/tmp/$STRESS_NG_OUTPUT_FILE >> stress-ng.log 2>&1
     ssh $remote_user_at_host "/tmp/yaml2json.py $category" | tee -a "$1"
   fi
 done
