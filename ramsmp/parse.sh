@@ -10,6 +10,11 @@ fi
 
 mkdir -p $(dirname $3)
 
+header="benchmark,base_result,lower_is_better,result"
+if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
+    echo "$header" | tee "$3"
+fi
+
 test_list=('FL-POINT  Copy' 'FL-POINT  Scale' 'FL-POINT  Add' 'FL-POINT  Triad')
 
 for test in "${test_list[@]}"; do

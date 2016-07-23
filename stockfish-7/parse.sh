@@ -8,12 +8,17 @@ ENDOFMESSAGE
     exit
 fi
 
+mkdir -p $(dirname $3)
+
+header="benchmark,base_result,lower_is_better,result"
+if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
+    echo "$header" | tee "$3"
+fi
+
 p='^Nodes/second\s+:\s+\K[\d.]+'
 
 base_res=`grep -oP "$p" "$1"`
 
 res=`grep -oP "$p" "$2"`
-
-mkdir -p $(dirname $3)
 
 echo "stockfish-7,$base_res,False,$res" | tee -a "$3"
