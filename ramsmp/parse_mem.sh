@@ -15,18 +15,16 @@ if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
 
-test_list=('None' 'Video' 'X' 'Burn' 'Write' 'Read' 'Compile')
+type=`grep -oP "^.+(?=Copy)" "$1"`
+
+test_list=("${type}Copy" "${type}Scale" "${type}Add" "${type}Triad")
 
 for test in "${test_list[@]}"; do
-    pattern="^$test\s+\K[\d\.]+"
+    pattern="^$test:\s+\K[\d+\.]+"
     
-    base_reses=(`grep -oP "$pattern" "$1"`)
-    reses=(`grep -oP "$pattern" "$2"`)
+    base_res=`grep -oP "$pattern" "$1"`
+    res=`grep -oP "$pattern" "$2"`
 
-    test_name=`echo "$test" | sed "s/[A-Z]/\l&/g"`
-    echo "interbench_audio_$test_name,${base_reses[0]},True,${reses[0]}" | tee -a "$3"
-
-    if [ "$test" != "Video" ]; then
-        echo "interbench_video_$test_name,${base_reses[1]},True,${reses[1]}" | tee -a "$3"
-    fi
+    test_name=`echo "$test" | sed "s/[A-Z]/\l&/g" | sed "s/ \{1,\}/_/g"`
+    echo "ramsmp_$test_name,$base_res,False,$res" | tee -a "$3"
 done

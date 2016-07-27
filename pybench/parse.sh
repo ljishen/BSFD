@@ -31,7 +31,7 @@ test_list=('BuiltinFunctionCalls' 'BuiltinMethodLookup' 'CompareFloats' 'Compare
            'UnicodeProperties' 'UnicodeSlicing' 'WithFinally' 'WithRaiseExcept')
 
 for test in "${test_list[@]}"; do
-    pattern="^\s*$test:.+?ms\s+\K[\d.]+"
+    pattern="^\s*$test:.+?ms\s+\K[\d\.]+"
     
     base_res=`grep -oP "$pattern" "$1"`
     res=`grep -oP "$pattern" "$2"`

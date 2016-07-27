@@ -20,7 +20,7 @@ test_list=('NUMERIC SORT' 'STRING SORT' 'BITFIELD' 'FP EMULATION' 'ASSIGNMENT' '
            'FLOATING-POINT INDEX')
 
 for test in "${test_list[@]}"; do
-    pattern="^$test\s*:\s+\K[\d.]+"
+    pattern="^$test\s*:\s+\K[\d\.]+"
     
     base_res=(`grep -oP "$pattern" "$1"`)
     res=(`grep -oP "$pattern" "$2"`)

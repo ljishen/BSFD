@@ -16,7 +16,7 @@ if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
 fi
 
 generatePattern() {
-    echo "(?s)Solving $1\-ply.*?\K[\d.]+(?= Kpos/sec)";
+    echo "(?s)Solving $1\-ply.*?\K[\d\.]+(?= Kpos/sec)";
 }
 
 p_8=`generatePattern 8`

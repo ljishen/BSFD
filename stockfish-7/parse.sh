@@ -15,7 +15,7 @@ if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
 
-p='^Nodes/second\s+:\s+\K[\d.]+'
+p='^Nodes/second\s+:\s+\K[\d\.]+'
 
 base_res=`grep -oP "$p" "$1"`
 

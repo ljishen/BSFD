@@ -15,7 +15,7 @@ if [ ! -f $FOLDER_NAME/himenoBMTxpa ]; then
         case $yn in
             [Yy]* )
                 mkdir $FOLDER_NAME
-                wget -O $FOLDER_NAME/himenoBMTxpa.c https://github.com/ljishen/srl/raw/master/kivier/benchmark-suite/himeno/docker/himenoBMTxpa.c 
+                wget -O $FOLDER_NAME/himenoBMTxpa.c https://github.com/ljishen/srl/raw/master/kivier/benchmark-suite/himeno/docker/himenoBMTxpa.c
                 gcc $FOLDER_NAME/himenoBMTxpa.c -O3 -o $FOLDER_NAME/himenoBMTxpa
                 rm $FOLDER_NAME/himenoBMTxpa.c
                 break

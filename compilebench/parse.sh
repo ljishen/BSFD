@@ -18,7 +18,7 @@ fi
 write_results() {
     declare -a test_list=("${!1}")
     for test in "${test_list[@]}"; do
-        local pattern="^$test.+?\K[\d.]+(?= $2)"
+        local pattern="^$test.+?\K[\d\.]+(?= $2)"
 
         local base_res=`grep -oP "$pattern" "$4"`
         local res=`grep -oP "$pattern" "$5"`
