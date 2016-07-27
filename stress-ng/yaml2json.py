@@ -8,7 +8,7 @@ import os
 #
 # when <method> is given, we assume only one entry in the yaml output
 
-out_file_path = os.path.dirname(os.path.realpath(__file__))+'/out.yml';
+out_file_path = os.path.dirname(os.path.realpath(__file__))+'/stress-ng_out.yml';
 
 with open(out_file_path, 'r') as f:
     y = yaml.load(f)
