@@ -10,10 +10,14 @@ fi
 
 mkdir -p $(dirname $3)
 
-header="benchmark,base_result,lower_is_better,result"
+header="machine,limits,benchmark,base_result,lower_is_better,result"
 if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
+
+bn=`basename "$2" ".prof"`
+machine=`echo "$bn" | cut -d _ -f 2`
+limits=`echo "$bn" | cut -d _ -f 1`
 
 type=`grep -oP "^.+(?=Copy)" "$1"`
 
@@ -26,5 +30,5 @@ for test in "${test_list[@]}"; do
     res=`grep -oP "$pattern" "$2"`
 
     test_name=`echo "$test" | sed "s/[A-Z]/\l&/g" | sed "s/ \{1,\}/_/g"`
-    echo "ramsmp_$test_name,$base_res,False,$res" | tee -a "$3"
+    echo "$machine,$limits,ramsmp_$test_name,$base_res,False,$res" | tee -a "$3"
 done

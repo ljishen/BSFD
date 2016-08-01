@@ -10,13 +10,17 @@ fi
 
 mkdir -p $(dirname $3)
 
-header="benchmark,base_result,lower_is_better,result"
+header="machine,limits,benchmark,base_result,lower_is_better,result"
 if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
 
-test_list=('NUMERIC SORT' 'STRING SORT' 'BITFIELD' 'FP EMULATION' 'ASSIGNMENT' 'IDEA'
-           'HUFFMAN' 'NEURAL NET' 'LU DECOMPOSITION' 'MEMORY INDEX' 'INTEGER INDEX'
+bn=`basename "$2" ".prof"`
+machine=`echo "$bn" | cut -d _ -f 2`
+limits=`echo "$bn" | cut -d _ -f 1`
+
+test_list=('NUMERIC SORT' 'STRING SORT' 'BITFIELD' 'FP EMULATION' 'FOURIER' 'ASSIGNMENT'
+           'IDEA' 'HUFFMAN' 'NEURAL NET' 'LU DECOMPOSITION' 'MEMORY INDEX' 'INTEGER INDEX'
            'FLOATING-POINT INDEX')
 
 for test in "${test_list[@]}"; do
@@ -27,8 +31,8 @@ for test in "${test_list[@]}"; do
 
     test_name=`echo "$test" | sed "s/[A-Z]/\l&/g" | sed "s/ /_/g"`
     index=0
-    if [ "$test" == "FLOATING-POINT INDEX" ]; then
+    if [ "$test" == "FLOATING-POINT INDEX" ] || [ "$test" == "INTEGER INDEX" ]; then
         index=1
     fi
-    echo "nbench_$test_name,${base_res[$index]},False,${res[$index]}" | tee -a "$3"
+    echo "$machine,$limits,nbench_$test_name,${base_res[$index]},False,${res[$index]}" | tee -a "$3"
 done

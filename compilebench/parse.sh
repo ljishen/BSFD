@@ -10,10 +10,14 @@ fi
 
 mkdir -p $(dirname $3)
 
-header="benchmark,base_result,lower_is_better,result"
+header="machine,limits,benchmark,base_result,lower_is_better,result"
 if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
+
+bn=`basename "$2" ".prof"`
+machine=`echo "$bn" | cut -d _ -f 2`
+limits=`echo "$bn" | cut -d _ -f 1`
 
 write_results() {
     declare -a test_list=("${!1}")
@@ -24,7 +28,7 @@ write_results() {
         local res=`grep -oP "$pattern" "$5"`
 
         local test_name=`echo "$test" | sed "s/ total//g" | sed "s/ /_/g"`
-        echo "compilebench_$test_name,$base_res,$3,$res" | tee -a "$6"
+        echo "$machine,$limits,compilebench_$test_name,$base_res,$3,$res" | tee -a "$6"
     done
 }
 

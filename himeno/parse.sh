@@ -10,15 +10,19 @@ fi
 
 mkdir -p $(dirname $3)
 
-header="benchmark,base_result,lower_is_better,result"
+header="machine,limits,benchmark,base_result,lower_is_better,result"
 if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
 
-p='^MFLOPS measured : \K[\d\.]+'
+bn=`basename "$2" ".prof"`
+machine=`echo "$bn" | cut -d _ -f 2`
+limits=`echo "$bn" | cut -d _ -f 1`
+
+p='MFLOPS measured : \K[\d\.]+'
 
 base_res=`grep -oP "$p" "$1"`
 
 res=`grep -oP "$p" "$2"`
 
-echo "himeno,$base_res,False,$res" | tee -a "$3"
+echo "$machine,$limits,himeno,$base_res,False,$res" | tee -a "$3"
