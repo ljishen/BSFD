@@ -22,5 +22,6 @@ RUN gcc himenoBMTxpa.c -O3 -o himenoBMTxpa \
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["./himenoBMTxpa"]
-CMD ["M"]
+WORKDIR /root
+COPY run.sh .
+ENTRYPOINT ["./run.sh"]

@@ -25,5 +25,5 @@ RUN rm -rf $FOLDER_NAME $FOLDER_NAME.tar.gz
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD run.sh .
+COPY run.sh .
 ENTRYPOINT ["./run.sh"]

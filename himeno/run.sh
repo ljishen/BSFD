@@ -8,7 +8,7 @@ ENDOFMESSAGE
     exit
 fi
 
-FOLDER_NAME=himeno
+FOLDER_NAME=${FOLDER_NAME:-himeno}
 if [ ! -f $FOLDER_NAME/himenoBMTxpa ]; then
     while true; do
         read -p "Do you wish to install Himeno benchmark? [y/n] " yn

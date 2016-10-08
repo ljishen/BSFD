@@ -21,5 +21,5 @@ RUN wget https://oss.oracle.com/~mason/compilebench/$FOLDER_NAME-0.6.tar.bz2 \
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD run.sh .
+COPY run.sh .
 ENTRYPOINT ["./run.sh"]
