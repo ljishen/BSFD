@@ -1,4 +1,4 @@
-# VERSION 1.0
+# VERSION 1.1
 
 FROM ubuntu:latest
 
@@ -24,4 +24,6 @@ RUN ./build.sh Linux x86_64
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["./ramsmp"]
+WORKDIR /root
+COPY run.sh .
+ENTRYPOINT ["./run.sh"]
