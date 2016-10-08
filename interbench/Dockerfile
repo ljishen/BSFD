@@ -1,4 +1,4 @@
-# VERSION 1.0
+# VERSION 1.1
 
 FROM ubuntu:latest
 
@@ -18,12 +18,11 @@ RUN wget https://github.com/Mustaavalkosta/interbench/archive/master.zip \
     && rm master.zip \
     && mv interbench-master $FOLDER_NAME
 
-WORKDIR $FOLDER_NAME
-RUN make
+RUN make -C $FOLDER_NAME
 
 # Clean Up
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["./interbench", "-c"]
-CMD ["-r", "-L", "1"]
+COPY run.sh .
+ENTRYPOINT ["./run.sh"]

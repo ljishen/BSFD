@@ -5,9 +5,11 @@
 
 #### Usage
 ```bash
-docker run --rm -t \
-    --privileged \
-    ljishen/interbench
+docker run --rm \
+    --cap-add=SYS_NICE \
+    -v `pwd`:/root/results \
+    ljishen/interbench \
+    /root/results/output.prof
 ```
 
 ###### These are appendable arguments
