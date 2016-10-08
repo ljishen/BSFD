@@ -14,7 +14,7 @@ if ! command -v blogbench >/dev/null 2>&1; then
         read -p "Do you wish to install Blogbench 1.1? [y/n] " yn
         case $yn in
             [Yy]* )
-                FOLDER_NAME=blogbench-1.1
+                FOLDER_NAME=${FOLDER_NAME:-blogbench-1.1}
                 wget https://download.pureftpd.org/pub/blogbench/$FOLDER_NAME.tar.gz
                 tar -xf $FOLDER_NAME.tar.gz
                 cd $FOLDER_NAME

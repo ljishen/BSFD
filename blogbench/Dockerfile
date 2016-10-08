@@ -25,4 +25,5 @@ RUN rm -rf $FOLDER_NAME $FOLDER_NAME.tar.gz
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["blogbench", "-d", "/tmp"]
+ADD run.sh .
+ENTRYPOINT ["./run.sh"]
