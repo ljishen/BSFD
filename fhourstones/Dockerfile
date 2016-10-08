@@ -23,4 +23,5 @@ RUN gcc -O $FOLDER_NAME/SearchGame.c -o $FOLDER_NAME/SearchGame
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["/bin/bash", "-c", "$FOLDER_NAME/SearchGame < $FOLDER_NAME/inputs"]
+ADD run.sh .
+ENTRYPOINT ["./run.sh"]

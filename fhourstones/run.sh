@@ -8,7 +8,7 @@ ENDOFMESSAGE
     exit
 fi
 
-FOLDER_NAME=fhourstones
+FOLDER_NAME=${FOLDER_NAME:-fhourstones}
 if [ ! -f $FOLDER_NAME/SearchGame ]; then
     while true; do
         read -p "Do you wish to install The Fhourstones Benchmark (version 3.1)? [y/n] " yn
