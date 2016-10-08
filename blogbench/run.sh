@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -lt 2 ]; then
     cat <<-ENDOFMESSAGE
 Please specify an writable working directory and output file as argument.
-Usage: ./run.sh <working directory> <output file>
+Usage: ./run.sh <working directory> <output file> [OPTION]
 ENDOFMESSAGE
     exit
 fi
@@ -36,7 +36,7 @@ fi
 
 mkdir -p $1
 mkdir -p $(dirname $2)
-blogbench -d $1 | tee $2
+blogbench -d $1 "${@:3}" | tee $2
 
 echo "Clean working directory..."
 rm -rf $1

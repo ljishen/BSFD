@@ -3,7 +3,7 @@
 if [ "$#" -lt 2 ]; then
     cat <<-ENDOFMESSAGE
 Please specify a working directory and the output file as argument.
-Usage: ./run.sh <output file> <working directory>
+Usage: ./run.sh <output file> <working directory> [OPTION]
 
 Compilebench version: 0.6
 
@@ -28,7 +28,7 @@ ENDOFMESSAGE
     exit
 fi
 
-FOLDER_NAME=compilebench
+FOLDER_NAME=${FOLDER_NAME:-compilebench}
 if [ ! -f $FOLDER_NAME/compilebench ]; then
     while true; do
         read -p "Do you wish to install Compilebench v0.6? [y/n] " yn
