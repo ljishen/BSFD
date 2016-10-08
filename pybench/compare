@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+if [ "$#" -lt 3 ]; then
+    cat <<-ENDOFMESSAGE
+Please specify the target benchmark file, the base benchmark file for comparison baseline and the output file for result.
+Usage: ./run compare <target benchmark file> <base benchmark file> <result output file> [OPTION]
+ENDOFMESSAGE
+    exit
+fi
+
+TARGET="$1"
+shift
+
+BASE="$1"
+shift
+
+OUTPUT="$1"
+shift
+
+mkdir -p $(dirname "$OUTPUT")
+$FOLDER_NAME/pybench.py -s "$TARGET" -c "$BASE" "$@" | tee "$OUTPUT"

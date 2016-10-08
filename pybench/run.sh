@@ -1,9 +1,9 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ]; then
     cat <<-ENDOFMESSAGE
-Please specify the file base name for benchmark and output.
-Usage: ./run.sh <file base name>
+Please specify the execution type.
+Usage: ./run.sh <bench|compare> <ARGS>
 ENDOFMESSAGE
     exit
 fi
@@ -29,5 +29,10 @@ if [ ! -f $FOLDER_NAME/pybench.py ]; then
     done
 fi
 
-mkdir -p $(dirname $1)
-$FOLDER_NAME/pybench.py -f $1.pybench | tee $1.prof
+if [ "$1" == "bench" ] || [ "$1" == "compare" ]; then
+    # Variable sharing using "."
+    # See http://stackoverflow.com/questions/9772036/pass-all-variables-from-one-shellscript-to-another
+    . ./"$@"
+else
+    echo "Error: unknown execution type \"$1\". (Only \"bench\" or \"compare\" are allowed)"
+fi

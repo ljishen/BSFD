@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+if [ "$#" -lt 1 ]; then
+    cat <<-ENDOFMESSAGE
+Please specify the file base name for benchmark and output.
+Usage: ./run.sh bench <base name of output file> [OPTION]
+ENDOFMESSAGE
+    exit
+fi
+
+OUTPUT_BASE="$1"
+
+# sh shell doesn't support "${@:1}", so we need to use argument shift
+shift
+
+mkdir -p $(dirname "$OUTPUT_BASE")
+$FOLDER_NAME/pybench.py -f "$OUTPUT_BASE".pybench "$@" | tee "$OUTPUT_BASE".prof
