@@ -8,7 +8,7 @@ ENDOFMESSAGE
     exit
 fi
 
-FOLDER_NAME=nbench
+FOLDER_NAME=${FOLDER_NAME:-nbench}
 if [ ! -f $FOLDER_NAME/nbench ]; then
     while true; do
         read -p "Do you wish to install Linux/Unix nbench (Version 2.2.3)? [y/n] " yn
@@ -33,6 +33,11 @@ fi
 
 mkdir -p $(dirname $1)
 
+out_file="$1"
+if [[ $1 != /* ]]; then
+    out_file="../$1"
+fi
+
 crdir=$(pwd)
-cd $FOLDER_NAME && ./nbench | tee "../$1"
+cd $FOLDER_NAME && ./nbench -v | tee "$out_file"
 cd $crdir
