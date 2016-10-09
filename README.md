@@ -1,0 +1,1 @@
+# Benchmark Suite for Fingerprint DevicesAll benchmarks can be run by `run.sh` script or docker image as described within respective benchmark folder.
