@@ -11,11 +11,14 @@ There are five parameters:
 (3) the limit value spent for each position (optional, default is depth 13)
 (4) an optional file name where to look for positions in FEN format
 (5) the type of the limit value: depth (default), time in millisecs or number of nodes.
+
+Example: ./run.sh 128 8 18
+See: http://support.stockfishchess.org/discussions/questions/170-testing-stockfish-on-a-machine-with-more-than-8-cores
 ENDOFMESSAGE
     exit
 fi
 
-FOLDER_NAME=stockfish-7
+FOLDER_NAME=${FOLDER_NAME:-stockfish-7}
 if [ ! -f $FOLDER_NAME/src/stockfish ]; then
     while true; do
         read -p "Do you wish to install Stockfish 7? [y/n] " yn
@@ -131,7 +134,7 @@ ENDOFMESSAGE
     done
 fi
 
-mkdir -p $(dirname $1)
+mkdir -p $(dirname "$1")
 
 # The default execution arguments:
 # - 16      as the transposition table size
@@ -140,4 +143,4 @@ mkdir -p $(dirname $1)
 # - default as the optional file name where to look for positions in FEN format
 # - depth   as the type of the limit value: depth (default), time in millisecs or number of nodes.
 # See https://github.com/mcostalba/Stockfish/blob/master/src/benchmark.cpp
-$FOLDER_NAME/src/stockfish bench "${@:2}" 2>&1 | tee $1
+$FOLDER_NAME/src/stockfish bench "${@:2}" 2>&1 | tee "$1"

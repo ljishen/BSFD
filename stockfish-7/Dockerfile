@@ -25,4 +25,6 @@ RUN make build ARCH=x86-64
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["./stockfish", "bench"]
+WORKDIR /root
+COPY run.sh .
+ENTRYPOINT ["./run.sh"]
