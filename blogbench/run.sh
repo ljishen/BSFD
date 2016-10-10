@@ -9,7 +9,6 @@ ENDOFMESSAGE
 fi
 
 if ! command -v blogbench >/dev/null 2>&1; then
-    crdir=$(pwd)
     while true; do
         read -p "Do you wish to install Blogbench 1.1? [y/n] " yn
         case $yn in
@@ -20,8 +19,9 @@ if ! command -v blogbench >/dev/null 2>&1; then
                 cd $FOLDER_NAME
                 ./configure
                 make install-strip
-                cd $crdir
+                cd ..
                 rm -rf $FOLDER_NAME $FOLDER_NAME.tar.gz
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

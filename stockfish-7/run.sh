@@ -122,6 +122,7 @@ ENDOFMESSAGE
                 esac
 
                 make -C $FOLDER_NAME/src build ARCH=$arch COMP=$comp
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

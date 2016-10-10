@@ -1,27 +1,29 @@
 #!/bin/bash -e
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -lt 1 ]; then
     cat <<-ENDOFMESSAGE
-Please specify an writable working directory and output file as argument.
-Usage: ./run.sh <working directory> <output file>
+Please specify at least the output file, the test name and command.
+Usage: ./run.sh <output file> --test=<test-name> [options]... <command>
+
+You can use `./sysbench help` (without --test) to display the brief usage summary and the list of available test modes.
 ENDOFMESSAGE
     exit
 fi
 
-if ! command -v blogbench >/dev/null 2>&1; then
-    crdir=$(pwd)
+FOLDER_NAME=${FOLDER_NAME:-sysbench}
+VERSION=${VERSION:-1.0}
+if [ ! -f ${FOLDER_NAME}-${VERSION}/$FOLDER_NAME/sysbench ]; then
     while true; do
-        read -p "Do you wish to install Blogbench 1.1? [y/n] " yn
+        read -p "Do you wish to install SysBench ($VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                FOLDER_NAME=blogbench-1.1
-                wget https://download.pureftpd.org/pub/blogbench/$FOLDER_NAME.tar.gz
-                tar -xf $FOLDER_NAME.tar.gz
-                cd $FOLDER_NAME
-                ./configure
-                make install-strip
-                cd $crdir
-                rm -rf $FOLDER_NAME $FOLDER_NAME.tar.gz
+                wget https://github.com/ljishen/kividry/raw/master/benchmark-suite/sysbench/${VERSION}.zip
+                unzip ${VERSION}.zip && rm ${VERSION}.zip
+                cd ${FOLDER_NAME}-${VERSION}
+                ./autogen.sh
+                ./configure --without-mysql
+                make
+                cd ..
                 break
                 ;;
             [Nn]* )
@@ -34,10 +36,13 @@ if ! command -v blogbench >/dev/null 2>&1; then
     done
 fi
 
-mkdir -p $1
-mkdir -p $(dirname $2)
-blogbench -d $1 | tee $2
+out_file="$1"
+if [[ "$1" != /* ]]; then
+    out_file="../$1"
+fi
 
-echo "Clean working directory..."
-rm -rf $1
-echo "done."
+mkdir -p $(dirname "$1") workdir
+cd workdir && ../${FOLDER_NAME}-${VERSION}/$FOLDER_NAME/sysbench "${@:2}" | tee "$out_file" 
+
+# Navigate back to the original path in case people call this script using `source` command.
+cd ..

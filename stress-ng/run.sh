@@ -29,6 +29,7 @@ if [ ! -f $FOLDER_NAME/stress-ng ]; then
                 tar -xf $VERSION.tar.gz -C $FOLDER_NAME --strip-components=1
                 rm $VERSION.tar.gz
                 CC=gcc make -C $FOLDER_NAME
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

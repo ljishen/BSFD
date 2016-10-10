@@ -17,6 +17,7 @@ if [ ! -f $FOLDER_NAME/pybench.py ]; then
                 wget https://github.com/ljishen/srl/raw/master/kivier/benchmark-suite/pybench/docker/pybench-r89074.tar.gz
                 tar -xf pybench-r89074.tar.gz
                 rm pybench-r89074.tar.gz
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

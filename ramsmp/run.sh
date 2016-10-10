@@ -23,7 +23,6 @@ fi
 
 FOLDER_NAME=${FOLDER_NAME:-ramsmp}
 if [ ! -f $FOLDER_NAME/ramsmp ]; then
-    crdir=$(pwd)
     while true; do
         read -p "Do you wish to install RAMspeed/SMP (UNIX) v3.5.0? [y/n] " yn
         case $yn in
@@ -34,7 +33,8 @@ if [ ! -f $FOLDER_NAME/ramsmp ]; then
                 rm ramsmp-3.5.0.tar.gz
                 cd $FOLDER_NAME
                 ./build.sh
-                cd $crdir
+                cd ..
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

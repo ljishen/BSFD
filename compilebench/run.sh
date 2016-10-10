@@ -38,6 +38,7 @@ if [ ! -f $FOLDER_NAME/compilebench ]; then
                 tar -xf $FOLDER_NAME-0.6.tar.bz2
                 mv $FOLDER_NAME-0.6 $FOLDER_NAME
                 rm $FOLDER_NAME-0.6.tar.bz2
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )
@@ -53,22 +54,20 @@ fi
 mkdir -p $(dirname $1)
 mkdir -p "$2"
 
-out_file=$1
-if [[ $1 != /* ]]; then
+out_file="$1"
+if [[ "$1" != /* ]]; then
     out_file="../$1"
 fi
 
-work_dir=$2
-if [[ $2 != /* ]]; then
+work_dir="$2"
+if [[ "$2" != /* ]]; then
     work_dir="../$2"
 fi
-
-crdir=$(pwd)
 
 # "${@:3}" Only keep the arguments from the thrid.
 cd $FOLDER_NAME && ./compilebench -D "$work_dir" "${@:3}" 2>&1 | tee "$out_file"
 
-cd $crdir
+cd ..
 
 echo -e "\nClean working directory..."
 rm -rf "$2"

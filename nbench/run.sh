@@ -19,6 +19,7 @@ if [ ! -f $FOLDER_NAME/nbench ]; then
                 mv $FOLDER_NAME-byte-2.2.3 $FOLDER_NAME
                 rm $FOLDER_NAME-byte-2.2.3.tar.gz
                 make -C $FOLDER_NAME
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )
@@ -34,10 +35,9 @@ fi
 mkdir -p $(dirname $1)
 
 out_file="$1"
-if [[ $1 != /* ]]; then
+if [[ "$1" != /* ]]; then
     out_file="../$1"
 fi
 
-crdir=$(pwd)
 cd $FOLDER_NAME && ./nbench -v | tee "$out_file"
-cd $crdir
+cd ..

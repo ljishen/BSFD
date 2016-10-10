@@ -19,6 +19,7 @@ if [ ! -f $FOLDER_NAME/interbench ]; then
                 rm master.zip
                 mv interbench-master $FOLDER_NAME
                 make -C $FOLDER_NAME
+                echo "Successfully install ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )
@@ -37,8 +38,8 @@ mkdir -p $(dirname $1)
 $FOLDER_NAME/interbench -L 1 -c -r ${@:2} | tee $1
 
 LOOPS_PER_MS=interbench.loops_per_ms
-if [-f $LOOPS_PER_MS ]; then
-    mv $LOOP_PER_MS "$(dirname $1)"
+if [ -f $LOOPS_PER_MS ]; then
+    mv $LOOPS_PER_MS "$(dirname $1)"
 fi
 
 echo "Clean working directory..."
