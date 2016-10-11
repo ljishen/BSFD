@@ -38,4 +38,4 @@ Recommend to run as root and set -L to number of CPUs on the system
 
 The default execution performs real time scheduling benchmarks and uses cpu load of 1 with burn load.
 
-See [Home Page](https://github.com/Mustaavalkosta/interbench) of The Linux Interactivity Benchmark for more details.
+See [Homepage](https://github.com/Mustaavalkosta/interbench) of The Linux Interactivity Benchmark for more details.

@@ -21,7 +21,7 @@ FOLDER_NAME=${FOLDER_NAME:-stress-ng}
 VERSION=${VERSION:-V0.06.18}
 if [ ! -f $FOLDER_NAME/stress-ng ]; then
     while true; do
-        read -p "Do you wish to install Stress-ng ($VERSION)? [y/n] " yn
+        read -p "Do you wish to install Stress-ng (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
                 wget https://github.com/ColinIanKing/stress-ng/archive/$VERSION.tar.gz
