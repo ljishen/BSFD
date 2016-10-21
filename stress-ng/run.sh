@@ -18,7 +18,7 @@ ENDOFMESSAGE
 fi
 
 FOLDER_NAME=${FOLDER_NAME:-stress-ng}
-VERSION=${VERSION:-V0.06.18}
+VERSION=${VERSION:-V0.07.00}
 if [ ! -f $FOLDER_NAME/stress-ng ]; then
     while true; do
         read -p "Do you wish to install Stress-ng (Version $VERSION)? [y/n] " yn

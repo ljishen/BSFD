@@ -3,7 +3,7 @@
 if [ "$#" -ne 3 ]; then
     cat <<-ENDOFMESSAGE
 Please specify the base result file and the result file, as well as the output file as arguments.
-The result file should be named in this format: limits_machine_stressor_class.prof
+The result file should be named in this format: <limits>_<machine>_<stressor-class>.prof
 
 Usage: ./parse.sh <base result file> <result file> <output file>
 ENDOFMESSAGE

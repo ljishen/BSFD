@@ -1,11 +1,23 @@
 #!/bin/bash -e
 
-if [ "$#" -lt 3 ]; then
+if [ "$#" -lt 2 ]; then
     cat <<-ENDOFMESSAGE
 Please specify at least the output file, the test name and command.
 Usage: ./run.sh <output file> --test=<test-name> [options]... <command>
 
 You can use "./run.sh <output file> help" (without --test) to display the brief usage summary and the list of available test modes.
+
+Examples:
+# Run CPU performance test
+./run.sh output.prof --test=cpu --cpu-max-prime=20000 run
+
+# Run File I/O test
+./run.sh output.prof --test=fileio --file-num=64 prepare
+./run.sh output.prof --test=fileio --file-num=64 --file-test-mode=seqrewr run
+./run.sh output.prof --test=fileio cleanup
+
+# Print help message
+./run.sh output.prof help
 ENDOFMESSAGE
     exit
 fi
@@ -17,9 +29,10 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/$FOLDER_NAME/sysbench ]; then
         read -p "Do you wish to install SysBench (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://github.com/ljishen/kividry/raw/master/benchmark-suite/sysbench/${VERSION}.zip
-                unzip ${VERSION}.zip && rm ${VERSION}.zip
+                wget -O ${VERSION}.zip https://github.com/ljishen/kividry/raw/master/benchmark-suite/sysbench/${VERSION}.zip
+                unzip -o ${VERSION}.zip && rm ${VERSION}.zip
                 cd ${FOLDER_NAME}-${VERSION}
+                chmod +x autogen.sh
                 ./autogen.sh
                 ./configure --without-mysql
                 make

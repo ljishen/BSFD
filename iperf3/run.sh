@@ -6,6 +6,16 @@ Please specify at least the output file and mode (server/client).
 Usage: ./run.sh <output file> [-s|-c host] [options]
 
 You can use "./run.sh <output file> --help" show a help synopsis. 
+
+Examples:
+# Run a test in client mode, connecting to an iPerf server running on host (c),
+# with report made every other second of the bandwidth (i),
+# repeatedly sent an array of len bytes for 20 seconds (t),
+# and with a 32M TCP buffer (w).
+./run.sh output.prof -c ikoula.testdebit.info -i 1 -t 20 -w 32M
+
+# Show a help synopsis and quit.
+./run.sh output.prof --help
 ENDOFMESSAGE
     exit
 fi

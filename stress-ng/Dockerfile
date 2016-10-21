@@ -10,7 +10,7 @@ RUN apt-get update \
         wget
 
 ENV FOLDER_NAME stress-ng
-ENV VERSION V0.06.18
+ENV VERSION V0.07.00
 
 RUN mkdir /root/$FOLDER_NAME
 
