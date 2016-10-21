@@ -12,7 +12,7 @@ Examples:
 # with report made every other second of the bandwidth (i),
 # repeatedly sent an array of len bytes for 20 seconds (t),
 # and with a 32M TCP buffer (w).
-./run.sh output.prof -c ikoula.testdebit.info -i 1 -t 20 -w 32M
+./run.sh output.prof -c iperf.he.net -i 1 -t 20 -w 32M
 
 # Show a help synopsis and quit.
 ./run.sh output.prof --help

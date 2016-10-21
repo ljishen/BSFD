@@ -5,7 +5,7 @@ test_name="memory"
 if [ "$#" -ne 3 ]; then
     cat <<-ENDOFMESSAGE
 Please specify the base result file and the result file, as well as the output file as arguments.
-The result should be named in this format: <limits>_<machine>_${test_name}_<opts>.prof
+The result should be named in this format: <limits>_<machine>_${test_name}_<opts>.prof (e.g. without_kv3_memory_seq.prof)
 
 Usage: ./parse_${test_name}.sh <base result file> <result file> <output file>
 ENDOFMESSAGE
