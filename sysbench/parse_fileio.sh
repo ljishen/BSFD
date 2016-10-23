@@ -53,7 +53,7 @@ for (( i=0; i<${#stats[@]}; i++ )); do
         base_res=`echo "scale=4; ${base_evs}/${base_res}" | bc`
         res=`echo "scale=4; ${evs}/${res}" | bc`
 
-        desc="event_fq"
+        desc="event-fq"
     fi
     
     echo "$machine,$limits,sysbench_${test_name}_${opts}_${desc},$base_res,False,$res" | tee -a "$3"
