@@ -1,7 +1,4 @@
 ---
-- name: save the loops value for item
-  set_fact: benchmark={{ item }}
-
 - name: ensure script folder exists
   file:
     path: "{{ remote_workdir }}/{{ benchmark.name }}"
@@ -14,13 +11,11 @@
     mode: 0755
     src: ../suite/{{ benchmark.name }}/run.sh 
 
-- name: testAAA#
-  debug: msg="{{ item }}"
-  with_items: "{{ benchmark.configs }}"
-
 - name: run {{ item.desc }}
-  include: run_specific.yml item={{ item }}
+  include: run_specific.yml
   with_items: "{{ benchmark.configs }}"
+  loop_control:
+    loop_var: config
 
 - name: clean remote workdir
   file:

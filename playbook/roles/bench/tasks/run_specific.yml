@@ -1,11 +1,11 @@
 ---
-- debug: msg="{{ item }}"
+- debug: msg="{{ config }}"
 
 - name: set output file name
-  set_fact: output_file_name=without_{{ inventory_hostname }}_{{ specific.output_file_suffix }}
+  set_fact: output_file_name=without_{{ inventory_hostname }}_{{ config.output_file_suffix }}
 
-- name: run {{ benchmark.name }} with {{ specific.desc }}
-  command: ./run.sh {{ output_file_name }} {{ specific.args }}
+- name: run {{ benchmark.name }} with {{ config.desc }}
+  command: ./run.sh {{ output_file_name }} {{ config.args }}
   args:
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
 
