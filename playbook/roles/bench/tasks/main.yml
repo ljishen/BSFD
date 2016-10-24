@@ -1,0 +1,4 @@
+---
+- name: loop the benchmark suite
+  include: run.yml
+  with_items: "{{ benchmarks }}"

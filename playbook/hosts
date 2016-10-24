@@ -1,0 +1,2 @@
+# dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
+kv3    ansible_ssh_user=root

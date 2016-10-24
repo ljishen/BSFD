@@ -1,0 +1,20 @@
+---
+remote_workdir: /tmp
+local_workdir: /home/ljishen/workdir
+
+benchmarks:
+  - name: sysbench
+    desc: "CPU performance test with Sysbench"
+    configs:
+      - desc: "max-prime=1000"
+        args: "--test=cpu --cpu-max-prime=1000 run"
+        output_file_suffix: cpu_1000.prof
+      - desc: "max-prime=20000"
+        args: "--test=cpu --cpu-max-prime=20000 run"
+        output_file_suffix: "cpu_20000.prof"
+#      - desc: "max-prime=500000"
+#        args: "--test=cpu --cpu-max-prime=500000 run"
+#        output_file_suffix: "cpu_500000.prof"
+#      - desc: "max-prime=1000000"
+#        args: "--test=cpu --cpu-max-prime=1000000 run"
+#        output_file_suffix: "cpu_1000000.prof"

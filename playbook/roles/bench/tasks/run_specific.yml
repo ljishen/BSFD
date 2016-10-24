@@ -1,0 +1,16 @@
+---
+- debug: msg="{{ item }}"
+
+- name: set output file name
+  set_fact: output_file_name=without_{{ inventory_hostname }}_{{ specific.output_file_suffix }}
+
+- name: run {{ benchmark.name }} with {{ specific.desc }}
+  command: ./run.sh {{ output_file_name }} {{ specific.args }}
+  args:
+    chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
+
+- name: collect output profile
+  fetch:
+    dest: "{{ local_workdir }}/{{ benchmark.name }}"
+    fail_on_missing: yes
+    src: "{{ remote_workdir }}/{{ benchmark.name }}/{{ output_file_name }}"

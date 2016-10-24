@@ -1,0 +1,6 @@
+---
+- name: run benchmark
+  hosts: all
+  gather_facts: false
+  roles:
+    - bench
