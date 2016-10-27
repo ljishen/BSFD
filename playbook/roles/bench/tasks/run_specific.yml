@@ -1,13 +1,13 @@
 ---
-- debug: msg="{{ config }}"
-
 - name: set output file name
   set_fact: output_file_name=without_{{ inventory_hostname }}_{{ config.output_file_suffix }}
 
 - name: run {{ benchmark.name }} with {{ config.desc }}
-  command: ./run.sh {{ output_file_name }} {{ config.args }}
-  args:
+  expect:
+    command: ./run.sh {{ output_file_name }} {{ config.args }}
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
+    responses:
+      y/n: "y"
 
 - name: collect output profile
   fetch:

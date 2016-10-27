@@ -29,7 +29,7 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/$FOLDER_NAME/sysbench ]; then
         read -p "Do you wish to install SysBench (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget -O ${VERSION}.zip https://github.com/ljishen/kividry/raw/master/benchmark-suite/sysbench/${VERSION}.zip
+                wget -O ${VERSION}.zip https://github.com/ljishen/BSFD/raw/master/suite/sysbench/${VERSION}.zip
                 unzip -o ${VERSION}.zip && rm ${VERSION}.zip
                 cd ${FOLDER_NAME}-${VERSION}
                 chmod +x autogen.sh

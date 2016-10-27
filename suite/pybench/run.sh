@@ -14,7 +14,7 @@ if [ ! -f $FOLDER_NAME/pybench.py ]; then
         read -p "Do you wish to install PYBENCH? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://github.com/ljishen/srl/raw/master/kivier/benchmark-suite/pybench/docker/pybench-r89074.tar.gz
+                wget https://github.com/ljishen/BSFD/blob/master/suite/pybench/pybench-r89074.tar.gz
                 tar -xf pybench-r89074.tar.gz
                 rm pybench-r89074.tar.gz
                 echo "Successfully install ${FOLDER_NAME}."
