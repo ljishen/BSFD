@@ -8,21 +8,21 @@ benchmarks:
     docker_image: ljishen/sysbench
     configs:
       # CPU performance test
-      - desc: "CPU performance test: max-prime=20000"
+      - desc: "CPU performance test: max-prime=2000"
         args:
-          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=20000 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=20000 run"
-        output_file_suffix: "cpu_20000.prof"
-      - desc: "CPU performance test: max-prime=500000"
+          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=2000 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=2000 run"
+        output_file_suffix: "cpu_2000.prof"
+      - desc: "CPU performance test: max-prime=10000"
         args:
-          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=500000 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=500000 run"
-        output_file_suffix: "cpu_500000.prof"
-      - desc: "CPU performance test: max-prime=1000000"
+          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=10000 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=10000 run"
+        output_file_suffix: "cpu_10000.prof"
+      - desc: "CPU performance test: max-prime=50000"
         args:
-          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=1000000 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=1000000 run"
-        output_file_suffix: "cpu_1000000.prof"
+          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=50000 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=50000 run"
+        output_file_suffix: "cpu_50000.prof"
  
       # Memory functions speed test
       - desc: "Memory functions speed test: memory-oper=read, memory-access-mode=seq"

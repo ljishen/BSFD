@@ -9,7 +9,7 @@
     dest: "{{ remote_workdir }}/{{ benchmark.name }}/run.sh"
     force: yes
     mode: 0755
-    src: ../suite/{{ benchmark.name }}/run.sh 
+    src: ../benchmarks/{{ benchmark.name }}/run.sh 
 
 - name: ({{ benchmark.name }}) run {{ benchmark.desc }}
   include: run_specific.yml

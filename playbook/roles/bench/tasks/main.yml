@@ -1,5 +1,5 @@
 ---
-- name: loop the benchmark suite
+- name: loop all benchmarks
   include: run.yml
   with_items: "{{ benchmarks }}"
   loop_control:
