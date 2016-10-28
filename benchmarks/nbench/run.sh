@@ -14,7 +14,7 @@ if [ ! -f $FOLDER_NAME/nbench ]; then
         read -p "Do you wish to install Linux/Unix nbench (Version 2.2.3)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://github.com/ljishen/BSFD/raw/master/benchmarks/nbench/nbench-byte-2.2.3.tar.gz
+                wget https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/nbench/nbench-byte-2.2.3.tar.gz
                 tar -xf $FOLDER_NAME-byte-2.2.3.tar.gz
                 mv $FOLDER_NAME-byte-2.2.3 $FOLDER_NAME
                 rm $FOLDER_NAME-byte-2.2.3.tar.gz

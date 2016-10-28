@@ -15,7 +15,7 @@ if [ ! -f $FOLDER_NAME/himenoBMTxpa ]; then
         case $yn in
             [Yy]* )
                 mkdir $FOLDER_NAME
-                wget -O $FOLDER_NAME/himenoBMTxpa.c https://github.com/ljishen/BSFD/blob/master/benchmarks/himeno/himenoBMTxpa.c
+                wget -O $FOLDER_NAME/himenoBMTxpa.c https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/himeno/himenoBMTxpa.c
                 gcc $FOLDER_NAME/himenoBMTxpa.c -O3 -o $FOLDER_NAME/himenoBMTxpa
                 rm $FOLDER_NAME/himenoBMTxpa.c
                 echo "Successfully install ${FOLDER_NAME}."
