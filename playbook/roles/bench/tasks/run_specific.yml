@@ -14,6 +14,7 @@
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
   environment:
     PATH: /usr/local/bin:/usr/bin:/bin
+  ignore_errors: "{{ benchmark.ignore_errors | default(False) }}"
 
 - name: collect output profile
   fetch:

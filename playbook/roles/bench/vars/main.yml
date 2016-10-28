@@ -44,6 +44,7 @@ benchmarks:
 
   - name: stress-ng
     desc: "CPU & Memory & I/O & Network performance test"
+    ignore_errors: True
     configs:
       # CPU performance test
       - desc: "CPU performance test: class=cpu"
