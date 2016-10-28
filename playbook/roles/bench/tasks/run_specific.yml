@@ -2,12 +2,12 @@
 - name: set output file name
   set_fact: output_file_name=without_{{ inventory_hostname }}_{{ config.output_file_suffix }}
 
-- name: run {{ benchmark.name }} with {{ config.desc }}
-  expect:
-    command: ./run.sh {{ output_file_name }} {{ config.args }}
+- name: run {{ config.desc }}
+  shell: yes | ./run.sh {{ output_file_name }} {{ config.args }}
+  args:
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
-    responses:
-      y/n: "y"
+  environment:
+    PATH: /usr/local/bin:/usr/bin:/bin
 
 - name: collect output profile
   fetch:

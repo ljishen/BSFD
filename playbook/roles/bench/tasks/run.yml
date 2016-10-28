@@ -11,7 +11,7 @@
     mode: 0755
     src: ../suite/{{ benchmark.name }}/run.sh 
 
-- name: run {{ benchmark.desc }} 
+- name: run {{ benchmark.desc }} using {{ benchmark.name }}
   include: run_specific.yml
   with_items: "{{ benchmark.configs }}"
   loop_control:
