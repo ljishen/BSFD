@@ -6,7 +6,6 @@ benchmarks:
   - name: sysbench
     desc: "CPU & Memory & File I/O performance test"
     docker_image: ljishen/sysbench
-    skip: True
     configs:
       # CPU performance test
       - desc: "CPU performance test: max-prime=20000"
