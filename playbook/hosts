@@ -1,2 +1,5 @@
-# dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
-kv3    ansible_ssh_user=root
+[docker_compatible]
+dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
+
+[docker_incompatible]
+kv3                     ansible_ssh_user=root

@@ -1,22 +1,48 @@
 ---
-- name: construct output file name
-  set_fact: output_file_name=without_{{ inventory_hostname }}_{{ config.output_file_suffix }}
+- name: ({{ benchmark.name }}) construct docker container name
+  set_fact:
+    container_name: "bsfd_{{ benchmark.name }}"
+  when: inventory_hostname in groups['docker_compatible']
 
-- name: construct run script arguments
-  set_fact: run_args="{{ config.args | regex_replace('##OUTPUT_FILE##', output_file_name ) }}"
+- name: ({{ benchmark.name }}) kill any obsolete containers
+  docker:
+    image: "{{ benchmark.docker_image }}"
+    name: "{{ container_name }}"
+    state: killed
+  when: inventory_hostname in groups['docker_compatible']
 
-- name: show execution command
-  debug: msg="./run.sh {{ run_args }}"
+- name: ({{ benchmark.name }}) set facts for docker incompatible machine
+  set_fact:
+    limits: without
+    comm_prefix: "yes | ./run.sh"
+    args: "{{ config.args.run }}"
+  when: inventory_hostname in groups['docker_incompatible']
 
-- name: run {{ config.desc }}
-  shell: yes | ./run.sh {{ run_args }}
+- name: ({{ benchmark.name }}) set facts for docker compatible machine
+  set_fact:
+    limits: with
+    comm_prefix: "docker run --rm"
+    args: "{{ config.args.docker_run | regex_replace('##CONTAINER_ID##', '--name ' + container_name + ' ' + benchmark.docker_image ) }}"
+  when: inventory_hostname in groups['docker_compatible']
+
+- name: ({{ benchmark.name }}) construct output file name
+  set_fact: output_file_name="{{ limits }}_{{ inventory_hostname }}_{{ config.output_file_suffix }}"
+
+- name: ({{ benchmark.name }}) construct execution command
+  set_fact: cmd="{{ comm_prefix }} {{ args | regex_replace('##OUTPUT_FILE##', output_file_name ) }}"
+
+- name: ({{ benchmark.name }}) show execution command
+  debug: msg="{{ cmd }}"
+
+- name: ({{ benchmark.name }}) run {{ config.desc }}
+  shell: "{{ cmd }}"
   args:
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
   environment:
     PATH: /usr/local/bin:/usr/bin:/bin
   ignore_errors: "{{ benchmark.ignore_errors | default(False) }}"
 
-- name: collect output profile
+- name: ({{ benchmark.name }}) collect output profile
   fetch:
     dest: "{{ local_workdir }}/{{ benchmark.name }}/{{ inventory_hostname }}/"
     flat: yes

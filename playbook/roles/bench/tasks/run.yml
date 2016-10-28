@@ -1,23 +1,23 @@
 ---
-- name: ensure {{ benchmark.name }} workdir exists
+- name: ({{ benchmark.name }}) ensure workdir exists
   file:
     path: "{{ remote_workdir }}/{{ benchmark.name }}"
     state: directory
 
-- name: copy run.sh script for {{ benchmark.name }} to remote location
+- name: ({{ benchmark.name }}) copy run.sh script to remote location
   copy:
     dest: "{{ remote_workdir }}/{{ benchmark.name }}/run.sh"
     force: yes
     mode: 0755
     src: ../suite/{{ benchmark.name }}/run.sh 
 
-- name: run {{ benchmark.desc }} using {{ benchmark.name }}
+- name: ({{ benchmark.name }}) run {{ benchmark.desc }}
   include: run_specific.yml
   with_items: "{{ benchmark.configs }}"
   loop_control:
     loop_var: config
 
-- name: clean remote workdir
+- name: ({{ benchmark.name }}) clean remote workdir
   file:
     path: "{{ remote_workdir }}/{{ benchmark.name }}"
     state: absent
