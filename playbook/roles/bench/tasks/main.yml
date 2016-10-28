@@ -4,3 +4,4 @@
   with_items: "{{ benchmarks }}"
   loop_control:
     loop_var: benchmark
+  when: not ( benchmark.skip | default(False) )

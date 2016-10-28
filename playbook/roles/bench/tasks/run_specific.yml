@@ -1,9 +1,15 @@
 ---
-- name: set output file name
+- name: construct output file name
   set_fact: output_file_name=without_{{ inventory_hostname }}_{{ config.output_file_suffix }}
 
+- name: construct run script arguments
+  set_fact: run_args="{{ config.args | regex_replace('##OUTPUT_FILE##', output_file_name ) }}"
+
+- name: show execution command
+  debug: msg="./run.sh {{ run_args }}"
+
 - name: run {{ config.desc }}
-  shell: yes | ./run.sh {{ output_file_name }} {{ config.args }}
+  shell: yes | ./run.sh {{ run_args }}
   args:
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
   environment:
@@ -11,6 +17,7 @@
 
 - name: collect output profile
   fetch:
-    dest: "{{ local_workdir }}/{{ benchmark.name }}"
+    dest: "{{ local_workdir }}/{{ benchmark.name }}/{{ inventory_hostname }}/"
+    flat: yes
     fail_on_missing: yes
     src: "{{ remote_workdir }}/{{ benchmark.name }}/{{ output_file_name }}"

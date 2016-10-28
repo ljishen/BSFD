@@ -4,29 +4,69 @@ local_workdir: /home/ljishen/workdir
 
 benchmarks:
   - name: sysbench
-    desc: "CPU performance test & Memory functions speed test"
+    desc: "CPU & Memory & File I/O performance test"
     configs:
-        # CPU performance test
+      # CPU performance test
       - desc: "CPU performance test: max-prime=20000"
-        args: "--test=cpu --cpu-max-prime=20000 run"
+        args: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=20000 run"
         output_file_suffix: "cpu_20000.prof"
       - desc: "CPU performance test: max-prime=500000"
-        args: "--test=cpu --cpu-max-prime=500000 run"
+        args: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=500000 run"
         output_file_suffix: "cpu_500000.prof"
       - desc: "CPU performance test: max-prime=1000000"
-        args: "--test=cpu --cpu-max-prime=1000000 run"
+        args: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=1000000 run"
         output_file_suffix: "cpu_1000000.prof"
 
-        # Memory functions speed test
+      # Memory functions speed test
       - desc: "Memory functions speed test: memory-oper=read, memory-access-mode=seq"
-        args: "--test=memory --memory-oper=read --memory-access-mode=seq run"
+        args: "##OUTPUT_FILE## --test=memory --memory-oper=read --memory-access-mode=seq run"
         output_file_suffix: "memory_read_seq.prof"
       - desc: "Memory functions speed test: memory-oper=write, memory-access-mode=seq"
-        args: "--test=memory --memory-oper=write --memory-access-mode=seq run"
+        args: "##OUTPUT_FILE## --test=memory --memory-oper=write --memory-access-mode=seq run"
         output_file_suffix: "memory_write_seq.prof"
       - desc: "Memory functions speed test: memory-oper=read, memory-access-mode=rnd"
-        args: "--test=memory --memory-oper=read --memory-access-mode=rnd run"
+        args: "##OUTPUT_FILE## --test=memory --memory-oper=read --memory-access-mode=rnd run"
         output_file_suffix: "memory_read_rnd.prof"
       - desc: "Memory functions speed test: memory-oper=write, memory-access-mode=rnd"
-        args: "--test=memory --memory-oper=write --memory-access-mode=rnd run"
+        args: "##OUTPUT_FILE## --test=memory --memory-oper=write --memory-access-mode=rnd run"
         output_file_suffix: "memory_write_rnd.prof"
+
+      # File I/O test
+      - desc: "File I/O test: file preparation"
+        args: "##OUTPUT_FILE## --test=fileio prepare"
+        output_file_suffix: "fileio_prepare.prof"
+      - desc: "File I/O test: file-test-mode=seqrewr"
+        args: "##OUTPUT_FILE## --test=fileio --file-test-mode=seqrewr run"
+        output_file_suffix: "fileio_seqrewr.prof"
+      - desc: "File I/O test: file cleanup"
+        args: "##OUTPUT_FILE## --test=fileio cleanup"
+        output_file_suffix: "fileio_cleanup.prof"
+
+  - name: stress-ng
+    desc: "CPU & Memory & I/O & Network performance test"
+    configs:
+      # CPU performance test
+      - desc: "CPU performance test: class=cpu"
+        args: "--yaml ##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
+        output_file_suffix: cpu.prof
+
+      # Memory performance test
+      - desc: "Memory performance test: class=memory"
+        args: "--yaml ##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
+        output_file_suffix: memory.prof
+
+      # I/O performance test
+      - desc: "I/O performance test: class=io"
+        args: "--yaml ##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
+        output_file_suffix: io.prof
+
+      # Network performance test
+      - desc: "Network performance test: class=network"
+        args: "--yaml ##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
+        output_file_suffix: network.prof
+
+  - name: iperf3
+    desc: "Network performance test"
+    skip: True
+    configs:
+      # TODO

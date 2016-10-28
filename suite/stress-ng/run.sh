@@ -6,8 +6,8 @@ Please specify arguments.
 Usage: ./run.sh [OPTION [ARG]]
 
 Examples:
-./run.sh --yaml output.yaml --timeout 10 --cpu-method ackermann --cpu 1
-./run.sh --yaml output.yaml --timeout 20 --class cpu-cache --sequential 1
+./run.sh --yaml output.yml --timeout 10 --cpu-method ackermann --cpu 1
+./run.sh --yaml output.yml --timeout 20 --class cpu-cache --sequential 1
 
 ./run.sh --cpu-method which
 ./run.sh --class which

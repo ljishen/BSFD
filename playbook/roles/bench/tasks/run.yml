@@ -1,10 +1,10 @@
 ---
-- name: ensure script folder exists
+- name: ensure {{ benchmark.name }} workdir exists
   file:
     path: "{{ remote_workdir }}/{{ benchmark.name }}"
     state: directory
 
-- name: copy run.sh script to remote location
+- name: copy run.sh script for {{ benchmark.name }} to remote location
   copy:
     dest: "{{ remote_workdir }}/{{ benchmark.name }}/run.sh"
     force: yes
