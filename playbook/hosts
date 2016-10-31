@@ -1,5 +1,6 @@
 [docker_compatible]
 dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
+issdm-6                 ansible_ssh_user=issdm
 
 [docker_incompatible]
 kv3                     ansible_ssh_user=root

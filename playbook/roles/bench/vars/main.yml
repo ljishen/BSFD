@@ -1,5 +1,5 @@
 ---
-remote_workdir: /tmp
+remote_workdir: /tmp/BSFD
 local_workdir: /home/ljishen/workdir
 
 benchmarks:
