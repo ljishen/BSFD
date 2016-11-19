@@ -1,0 +1,71 @@
+---
+system-info:
+      stress-ng-version: 0.07.00
+      run-by: unknown
+      date-yyyy-mm-dd: 2016:10:31
+      time-hh-mm-ss: 17:37:51
+      epoch-secs: 1477935471
+      hostname: kv3
+      sysname: Linux
+      nodename: kv3
+      release: 3.10.20-rt14katana_v1.0.3+AUTOINC+84a91af059
+      version: #1 SMP Tue Dec 22 19:22:02 PST 2015
+      machine: mips64
+      uptime: 11800221
+      totalram: 2013986816
+      freeram: 1375150080
+      sharedram: 0
+      bufferram: 95121408
+      totalswap: 0
+      freeswap: 0
+      pagesize: 4096
+      cpus: 4
+      cpus-online: 4
+      ticks-per-second: 100
+
+metrics:
+    - stressor: aio
+      bogo-ops: 1205920
+      bogo-ops-per-second-usr-sys-time: 73442.143727
+      bogo-ops-per-second-real-time: 120586.597859
+      wall-clock-time: 10.000448
+      user-time: 3.280000
+      system-time: 13.140000
+
+    - stressor: hdd
+      bogo-ops: 32768
+      bogo-ops-per-second-usr-sys-time: 5620.583190
+      bogo-ops-per-second-real-time: 2700.304446
+      wall-clock-time: 12.134928
+      user-time: 0.000000
+      system-time: 5.830000
+
+    - stressor: seek
+      bogo-ops: 757776
+      bogo-ops-per-second-usr-sys-time: 75853.453453
+      bogo-ops-per-second-real-time: 75622.045153
+      wall-clock-time: 10.020570
+      user-time: 0.420000
+      system-time: 9.570000
+
+    - stressor: sync-file
+      bogo-ops: 75
+      bogo-ops-per-second-usr-sys-time: 27.675277
+      bogo-ops-per-second-real-time: 7.477400
+      wall-clock-time: 10.030225
+      user-time: 0.400000
+      system-time: 2.310000
+
+times:
+      run-time: 53.839212
+      available-cpu-time: 215.356849
+      user-time: 6.660000
+      system-time: 38.799999
+      total-time: 45.459999
+      user-time-percent: 3.092541
+      system-time-percent: 18.016608
+      total-time-percent: 21.109149
+      load-average-1-minute: 2.360000
+      load-average-5-minute: 2.530000
+      load-average-15-minute: 1.280000
+...

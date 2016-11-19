@@ -1,0 +1,63 @@
+---
+system-info:
+      stress-ng-version: 0.07.00
+      run-by: unknown
+      date-yyyy-mm-dd: 2016:10:30
+      time-hh-mm-ss: 20:48:02
+      epoch-secs: 1477860482
+      hostname: ed14b11a03c9
+      sysname: Linux
+      nodename: ed14b11a03c9
+      release: 3.13.0-88-generic
+      version: #135-Ubuntu SMP Wed Jun 8 21:10:42 UTC 2016
+      machine: x86_64
+      uptime: 11726066
+      totalram: 8372076544
+      freeram: 6288732160
+      sharedram: 0
+      bufferram: 345632768
+      totalswap: 8587833344
+      freeswap: 7954866176
+      pagesize: 4096
+      cpus: 4
+      cpus-online: 4
+      ticks-per-second: 100
+
+metrics:
+    - stressor: aio
+      bogo-ops: 1255412
+      bogo-ops-per-second-usr-sys-time: 74815.971395
+      bogo-ops-per-second-real-time: 125560.601509
+      wall-clock-time: 9.998455
+      user-time: 2.450000
+      system-time: 14.330000
+
+    - stressor: hdd
+      bogo-ops: 32768
+      bogo-ops-per-second-usr-sys-time: 9002.197802
+      bogo-ops-per-second-real-time: 1517.260705
+      wall-clock-time: 21.596816
+      user-time: 0.000000
+      system-time: 3.640000
+
+    - stressor: seek
+      bogo-ops: 1
+      bogo-ops-per-second-usr-sys-time: 0.100100
+      bogo-ops-per-second-real-time: 0.099935
+      wall-clock-time: 10.006540
+      user-time: 0.710000
+      system-time: 9.280000
+
+times:
+      run-time: 65.953934
+      available-cpu-time: 263.815736
+      user-time: 4.540000
+      system-time: 36.450001
+      total-time: 40.990002
+      user-time-percent: 1.720898
+      system-time-percent: 13.816462
+      total-time-percent: 15.537360
+      load-average-1-minute: 5.810000
+      load-average-5-minute: 11.930000
+      load-average-15-minute: 6.360000
+...

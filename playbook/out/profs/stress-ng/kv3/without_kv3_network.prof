@@ -1,0 +1,95 @@
+---
+system-info:
+      stress-ng-version: 0.07.00
+      run-by: unknown
+      date-yyyy-mm-dd: 2016:10:31
+      time-hh-mm-ss: 17:39:04
+      epoch-secs: 1477935544
+      hostname: kv3
+      sysname: Linux
+      nodename: kv3
+      release: 3.10.20-rt14katana_v1.0.3+AUTOINC+84a91af059
+      version: #1 SMP Tue Dec 22 19:22:02 PST 2015
+      machine: mips64
+      uptime: 11800294
+      totalram: 2013986816
+      freeram: 1374769152
+      sharedram: 0
+      bufferram: 95166464
+      totalswap: 0
+      freeswap: 0
+      pagesize: 4096
+      cpus: 4
+      cpus-online: 4
+      ticks-per-second: 100
+
+metrics:
+    - stressor: epoll
+      bogo-ops: 266527
+      bogo-ops-per-second-usr-sys-time: 14184.513039
+      bogo-ops-per-second-real-time: 26651.436785
+      wall-clock-time: 10.000474
+      user-time: 4.140000
+      system-time: 14.650000
+
+    - stressor: icmp-flood
+      bogo-ops: 762631
+      bogo-ops-per-second-usr-sys-time: 76339.439439
+      bogo-ops-per-second-real-time: 76265.602000
+      wall-clock-time: 9.999672
+      user-time: 1.340000
+      system-time: 8.650000
+
+    - stressor: sock
+      bogo-ops: 1855
+      bogo-ops-per-second-usr-sys-time: 182.220039
+      bogo-ops-per-second-real-time: 185.435354
+      wall-clock-time: 10.003486
+      user-time: 0.170000
+      system-time: 10.010000
+
+    - stressor: sockfd
+      bogo-ops: 151
+      bogo-ops-per-second-usr-sys-time: 15.221774
+      bogo-ops-per-second-real-time: 15.056720
+      wall-clock-time: 10.028745
+      user-time: 0.390000
+      system-time: 9.530000
+
+    - stressor: sockpair
+      bogo-ops: 2265427
+      bogo-ops-per-second-usr-sys-time: 114127.304786
+      bogo-ops-per-second-real-time: 225616.587904
+      wall-clock-time: 10.041048
+      user-time: 1.000000
+      system-time: 18.850000
+
+    - stressor: udp
+      bogo-ops: 653725
+      bogo-ops-per-second-usr-sys-time: 65437.937938
+      bogo-ops-per-second-real-time: 65371.957611
+      wall-clock-time: 10.000083
+      user-time: 0.430000
+      system-time: 9.560000
+
+    - stressor: udp-flood
+      bogo-ops: 757648
+      bogo-ops-per-second-usr-sys-time: 75916.633267
+      bogo-ops-per-second-real-time: 75767.186295
+      wall-clock-time: 9.999685
+      user-time: 0.090000
+      system-time: 9.890000
+
+times:
+      run-time: 70.087855
+      available-cpu-time: 280.351420
+      user-time: 7.560000
+      system-time: 81.139999
+      total-time: 88.699997
+      user-time-percent: 2.696616
+      system-time-percent: 28.942247
+      total-time-percent: 31.638861
+      load-average-1-minute: 1.700000
+      load-average-5-minute: 2.290000
+      load-average-15-minute: 1.300000
+...
