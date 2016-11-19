@@ -1,3 +1,19 @@
 ---
-- name:
+- name: kill obsolete scipy-notebook containers
+  docker:
+    image: "jupyter/scipy-notebook"
+    name: "{{ notebook_container_name }}"
+    state: killed
 
+- name: launch scipy-notebook container
+  docker:
+    detach: True
+    image: "jupyter/scipy-notebook"
+    name: "{{ notebook_container_name }}"
+    ports:
+      - "{{ container_public_port }}:8888"
+    pull: always
+    restart_policy: on-failure
+    state: started
+    volumes:
+      - "{{ playbook_dir }}/visualize.ipynb:/home/jovyan/work/visualize.ipynb:rw"

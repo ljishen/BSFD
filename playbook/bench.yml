@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   roles:
-    - { role: bench, when: False }
+    - bench
 
 - name: parse benchmark result profiles
   hosts: localhost
@@ -11,7 +11,7 @@
   roles:
     - parse
 
-- name: generate notebook & launch IPython server
+- name: launch IPython notebook server
   hosts: localhost
   gather_facts: false
   roles:
