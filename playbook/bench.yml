@@ -10,3 +10,9 @@
   gather_facts: false
   roles:
     - parse
+
+- name: generate notebook & launch IPython server
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - show

@@ -1,2 +1,6 @@
+# Ansible Playbook
 *.retry
 ansible.log
+
+# IPython Notebook
+.ipynb_checkpoints
