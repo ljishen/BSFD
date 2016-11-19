@@ -44,7 +44,7 @@
 
 - name: ({{ benchmark.name }}) collect output profile
   fetch:
-    dest: "{{ local_workdir }}/{{ benchmark.name }}/{{ inventory_hostname }}/"
+    dest: "{{ local_profs_dir }}/{{ benchmark.name }}/{{ inventory_hostname }}/"
     flat: yes
     fail_on_missing: yes
     src: "{{ remote_workdir }}/{{ benchmark.name }}/{{ output_file_name }}"

@@ -1,0 +1,22 @@
+---
+- name: find all benchmarks profile folders
+  find:
+    file_type: directory
+    paths: "{{ local_profs_dir }}"
+  register: find_benchmark_folders_out
+
+- name: clean result folder
+  file:
+    path: "{{ local_res_file | dirname }}"
+    state: absent
+
+- name: ensure result folder exists
+  file:
+    path: "{{ local_res_file | dirname }}"
+    state: directory
+
+- name: parse profiles by benchmark
+  include: parse_by_benchmark.yml
+  with_items: "{{ find_benchmark_folders_out.files }}"
+  loop_control:
+    loop_var: folder

@@ -1,10 +1,10 @@
 ---
 remote_workdir: /tmp/BSFD
-local_workdir: /home/ljishen/workdir
 
 benchmarks:
   - name: sysbench
     desc: "CPU & Memory & File I/O performance test"
+    skip: True
     docker_image: ljishen/sysbench
     configs:
       # CPU performance test
@@ -51,7 +51,7 @@ benchmarks:
         args:
           run: "##OUTPUT_FILE## --test=fileio prepare"
           docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio prepare"
-        output_file_suffix: "fileio_prepare.prof"
+        output_file_suffix: "fileio_prepare.log"
       - desc: "File I/O test: file-test-mode=seqrewr"
         args:
           run: "##OUTPUT_FILE## --test=fileio --file-test-mode=seqrewr run"
@@ -61,7 +61,7 @@ benchmarks:
         args:
           run: "##OUTPUT_FILE## --test=fileio cleanup"
           docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio cleanup"
-        output_file_suffix: "fileio_cleanup.prof"
+        output_file_suffix: "fileio_cleanup.log"
 
   - name: stress-ng
     desc: "CPU & Memory & I/O & Network performance test"

@@ -3,4 +3,10 @@
   hosts: all
   gather_facts: false
   roles:
-    - bench
+    - { role: bench, when: False }
+
+- name: parse benchmark result profiles
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - parse

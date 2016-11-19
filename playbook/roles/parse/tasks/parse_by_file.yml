@@ -1,0 +1,11 @@
+---
+- name: ({{ benchmark_name }}) ({{ cur_host }}) ({{ file.path }}) construct base file path (part 1) - replace hostname
+  set_fact:
+    base_file: "{{ file.path | regex_replace(cur_host, groups['base'][0]) }}"
+
+- name: ({{ benchmark_name }}) ({{ cur_host }}) ({{ file.path }}) construct base file path (part 2) - replace limit
+  set_fact:
+    base_file: "{{ base_file | regex_replace('with', 'without') }}"
+
+- name: ({{ benchmark_name }}) ({{ cur_host }}) ({{ file.path }}) parse file and save result
+  command: ../benchmarks/{{ benchmark_name }}/parse.sh "{{ base_file }}" "{{ file.path }}" "{{ local_res_file }}"

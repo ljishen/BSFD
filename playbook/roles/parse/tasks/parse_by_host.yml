@@ -1,0 +1,13 @@
+---
+- name: ({{ benchmark_name }}) ({{ cur_host }}) find all benchmarks profiles
+  find:
+    file_type: file
+    paths: "{{ folder.path }}/{{ cur_host }}"
+    patterns: "*.prof"
+  register: find_benchmark_profiles_out
+
+- name: ({{ benchmark_name }}) ({{ cur_host }}) parse profile by file
+  include: parse_by_file.yml
+  with_items: "{{ find_benchmark_profiles_out.files }}"
+  loop_control:
+    loop_var: file 

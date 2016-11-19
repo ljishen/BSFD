@@ -1,0 +1,10 @@
+---
+- name: get benchmark name
+  set_fact: benchmark_name="{{ folder.path | basename }}"
+
+- name: ({{ benchmark_name }}) parse profiles by host
+  include: parse_by_host.yml 
+  with_items: "{{ groups['all'] }}"
+  loop_control:
+    loop_var: cur_host
+  when: not ( cur_host in groups['base'] ) 
