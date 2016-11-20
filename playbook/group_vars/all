@@ -1,3 +1,3 @@
 ---
-local_profs_dir: /home/ljishen/BSFD/playbook/out/profs
-local_res_file: /home/ljishen/BSFD/playbook/out/results/parse_res.prof
+local_profs_dir: "{{ playbook_dir }}/out/profs"
+local_res_file: "{{ playbook_dir }}/out/results/parse_res.prof"

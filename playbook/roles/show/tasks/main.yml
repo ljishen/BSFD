@@ -16,4 +16,4 @@
     restart_policy: on-failure
     state: started
     volumes:
-      - "{{ playbook_dir }}/visualize.ipynb:/home/jovyan/work/visualize.ipynb:rw"
+      - "{{ playbook_dir }}:/home/jovyan/work:rw"
