@@ -2,12 +2,5 @@
 # dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
 issdm-6                 ansible_ssh_user=issdm
 
-[docker_incompatible:children]
-base
-bare_metal
-
-[bare_metal]
-# kv5                     ansible_ssh_user=root
-
-[base]
-kv3                     ansible_ssh_user=root
+[docker_incompatible]
+kv3                     ansible_ssh_user=root   base=True

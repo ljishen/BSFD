@@ -7,4 +7,4 @@
   with_items: "{{ groups['all'] }}"
   loop_control:
     loop_var: cur_host
-  when: not ( cur_host in groups['base'] ) 
+  when: cur_host != base_host

@@ -1,4 +1,10 @@
 ---
+- name: lookup base host
+  include: lookup_base_host.yml
+  with_items: "{{ groups['all'] }}"
+  loop_control:
+    loop_var: check_host
+
 - name: find all benchmarks profile folders
   find:
     file_type: directory

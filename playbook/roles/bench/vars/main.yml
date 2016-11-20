@@ -66,30 +66,24 @@ benchmarks:
   - name: stress-ng
     desc: "CPU & Memory & I/O & Network performance test"
     docker_image: ljishen/stress-ng
+    skip: True
     ignore_errors: True
     configs:
-      # CPU performance test
       - desc: "CPU performance test: class=cpu"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
           docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
         output_file_suffix: "cpu.prof"
-
-      # Memory performance test
       - desc: "Memory performance test: class=memory"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
           docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
         output_file_suffix: "memory.prof"
-
-      # I/O performance test
       - desc: "I/O performance test: class=io"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
           docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
         output_file_suffix: "io.prof"
-
-      # Network performance test
       - desc: "Network performance test: class=network"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
@@ -97,8 +91,7 @@ benchmarks:
         output_file_suffix: "network.prof"
 
   - name: iperf3
-    desc: "Network performance test"
+    desc: "Network bandwidth performance test"
     docker_image: ljishen/iperf3
-    skip: True
     configs:
-      # TODO
+      - desc: "Launch "

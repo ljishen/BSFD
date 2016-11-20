@@ -1,0 +1,11 @@
+---
+- name: check base variable for {{ check_host }}
+  shell: if [ "{{ hostvars[check_host]['base'] | default(False) }}" == "True" ]; then echo "{{ check_host }}"; fi
+  args:
+    executable: /bin/bash
+  register: check_result
+
+- name: set fact for base host
+  set_fact:
+    base_host: "{{ check_result.stdout }}"
+  when: check_result.stdout != ""
