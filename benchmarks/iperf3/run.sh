@@ -10,9 +10,9 @@ You can use "./run.sh <output file> --help" show a help synopsis.
 Examples:
 # Run a test in client mode, connecting to an iPerf server running on host (c),
 # with report made every other second of the bandwidth (i),
-# repeatedly sent an array of len bytes for 20 seconds (t),
-# and with a 32M TCP buffer (w).
-./run.sh output.prof -c iperf.he.net -i 1 -t 20 -w 32M
+# repeatedly sent an array of bytes for 20 seconds (t),
+# and with a 32m TCP buffer (w).
+./run.sh output.prof --client iperf.he.net --interval 1 --time 20 --window 32m
 
 # Show a help synopsis and quit.
 ./run.sh output.prof --help
@@ -45,5 +45,6 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/src/iperf3 ]; then
     done
 fi
 
+rm -f "$1"
 mkdir -p $(dirname "$1")
-${FOLDER_NAME}-${VERSION}/src/iperf3 "${@:2}" 2>&1 | tee "$1" 
+${FOLDER_NAME}-${VERSION}/src/iperf3 --affinity 1 --format m --logfile "$1" "${@:2}"

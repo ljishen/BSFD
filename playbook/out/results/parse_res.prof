@@ -10,6 +10,13 @@ issdm-6,with,sysbench_fileio_seqrewr_fsyncs,1439.57,False,1382.63
 issdm-6,with,sysbench_fileio_seqrewr_written,17.57,False,16.88
 issdm-6,with,sysbench_fileio_seqrewr_event-fq,1124.6696,False,1080.1819
 issdm-6,with,sysbench_memory_write_seq,85875.72,False,259629.77
+issdm-6,with,iperf3_tcp_w200k_sender,931,False,938
+issdm-6,with,iperf3_tcp_w200k_receiver,931,False,937
+issdm-6,with,iperf3_tcp_w85k_sender,940,False,937
+issdm-6,with,iperf3_tcp_w85k_receiver,940,False,937
+issdm-6,with,iperf3_udp_w160k,1.05,False,1.05
+issdm-6,with,iperf3_tcp_w2k_sender,113,False,87.1
+issdm-6,with,iperf3_tcp_w2k_receiver,113,False,87.1
 issdm-6,with,stress-ng_network_epoll,26651.436785,False,34191.232682
 issdm-6,with,stress-ng_network_icmp-flood,76265.602000,False,69247.590019
 issdm-6,with,stress-ng_network_sock,185.435354,False,317.186932

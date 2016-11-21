@@ -37,6 +37,7 @@
 - name: ({{ benchmark.name }}) run {{ config.desc }}
   shell: "{{ cmd }}"
   args:
+    executable: /bin/bash
     chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
   environment:
     PATH: /usr/local/bin:/usr/bin:/bin

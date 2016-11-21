@@ -24,6 +24,9 @@ RUN ./configure; make
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Server port for the server to listen on
+EXPOSE 5201
+
 WORKDIR /root
 COPY run.sh .
 ENTRYPOINT ["./run.sh"]

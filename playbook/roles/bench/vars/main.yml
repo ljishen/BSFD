@@ -4,7 +4,6 @@ remote_workdir: /tmp/BSFD
 benchmarks:
   - name: sysbench
     desc: "CPU & Memory & File I/O performance test"
-    skip: True
     docker_image: ljishen/sysbench
     configs:
       # CPU performance test
@@ -66,32 +65,52 @@ benchmarks:
   - name: stress-ng
     desc: "CPU & Memory & I/O & Network performance test"
     docker_image: ljishen/stress-ng
-    skip: True
     ignore_errors: True
     configs:
       - desc: "CPU performance test: class=cpu"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
         output_file_suffix: "cpu.prof"
       - desc: "Memory performance test: class=memory"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
         output_file_suffix: "memory.prof"
       - desc: "I/O performance test: class=io"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
         output_file_suffix: "io.prof"
       - desc: "Network performance test: class=network"
         args:
           run: "--yaml ##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml results/##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
         output_file_suffix: "network.prof"
 
   - name: iperf3
     desc: "Network bandwidth performance test"
     docker_image: ljishen/iperf3
+    skip: True
     configs:
-      - desc: "Launch "
+      - desc: "Network bandwidth test: UDP, 160 KByte socket buffer size"
+        args:
+            run: "##OUTPUT_FILE## --client {{ iperf_server }} --udp --interval 1 --time 20 --window 160k"
+            docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --client {{ iperf_server }} --udp --interval 1 --time 20 --window 160k"
+        output_file_suffix: "udp_w160k.prof"
+      - desc: "Network bandwidth test: TCP, 2 KByte window size"
+        args:
+            run: "##OUTPUT_FILE## --client {{ iperf_server }} --time 20 --window 2k"
+            # FIXME: Error message "iperf3: error - the server is busy running a test. try again later" when execute docker run a second time
+            docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --client {{ iperf_server }} --time 20 --window 2k"
+        output_file_suffix: "tcp_w2k.prof"
+      - desc: "Network bandwidth test: TCP, 85 KByte window size"
+        args:
+            run: "##OUTPUT_FILE## --client {{ iperf_server }} --time 20 --window 85k"
+            docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --client {{ iperf_server }} --time 20 --window 85k"
+        output_file_suffix: "tcp_w85k.prof"
+      - desc: "Network bandwidth test: TCP, 200 KByte window size"
+        args:
+            run: "##OUTPUT_FILE## --client {{ iperf_server }} --time 20 --window 200k"
+            docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --client {{ iperf_server }} --time 20 --window 200k"
+        output_file_suffix: "tcp_w200k.prof"

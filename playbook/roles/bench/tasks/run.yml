@@ -10,6 +10,11 @@
     force: yes
     mode: 0755
     src: ../benchmarks/{{ benchmark.name }}/run.sh 
+  when: inventory_hostname in groups['docker_incompatible']
+
+- name: ({{ benchmark.name }}) remove obsolete local profiles
+  local_action: file path="{{ local_profs_dir }}/{{ benchmark.name }}" state=absent
+  run_once: true
 
 - name: ({{ benchmark.name }}) run {{ benchmark.desc }}
   include: run_specific.yml

@@ -1,6 +1,6 @@
 ---
 - name: check base variable for {{ check_host }}
-  shell: if [ "{{ hostvars[check_host]['base'] | default(False) }}" == "True" ]; then echo "{{ check_host }}"; fi
+  shell: if [[ "{{ hostvars[check_host]['base'] | default(False) }}" =~ [Tt]rue ]]; then echo "{{ check_host }}"; fi
   args:
     executable: /bin/bash
   register: check_result
