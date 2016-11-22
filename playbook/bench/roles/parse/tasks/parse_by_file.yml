@@ -8,4 +8,4 @@
     base_file: "{{ base_file | regex_replace('with', 'without') }}"
 
 - name: ({{ benchmark_name }}) ({{ cur_host }}) ({{ file.path }}) parse file and save result
-  command: ../benchmarks/{{ benchmark_name }}/parse.sh "{{ base_file }}" "{{ file.path }}" "{{ local_res_file }}"
+  command: ../../benchmarks/{{ benchmark_name }}/parse.sh "{{ base_file }}" "{{ file.path }}" "{{ local_res_file }}"

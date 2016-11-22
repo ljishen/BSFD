@@ -1,0 +1,6 @@
+---
+- name: change server state to {{ state }}
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: 

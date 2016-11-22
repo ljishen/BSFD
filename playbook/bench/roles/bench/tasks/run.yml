@@ -9,7 +9,7 @@
     dest: "{{ remote_workdir }}/{{ benchmark.name }}/run.sh"
     force: yes
     mode: 0755
-    src: ../benchmarks/{{ benchmark.name }}/run.sh 
+    src: ../../benchmarks/{{ benchmark.name }}/run.sh
   when: inventory_hostname in groups['docker_incompatible']
 
 - name: ({{ benchmark.name }}) remove obsolete local profiles
