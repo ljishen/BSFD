@@ -1,6 +1,18 @@
 ---
-- name: change server state to {{ state }}
+- name: change server state to {{ state | default('restarted') }}
   hosts: all
-  gather_facts: false
   tasks:
-    - name: 
+    - name: show the IP address of server host
+      debug: msg={{ ansible_default_ipv4['address'] }}
+
+    - docker:
+        detach: True
+        image: "ljishen/iperf3"
+        name: "bsfd_iperf-server"
+        net: host
+        pull: always
+        restart_policy: on-failure
+        state: "{{ state | default('restarted') }}"
+        volumes:
+          - /tmp/BSFD/iperf3:/root/iperf3
+        command: /root/iperf3/status.log -s --bind {{ ansible_default_ipv4['address'] }}
