@@ -8,7 +8,7 @@
     - docker:
         detach: True
         image: "ljishen/iperf3"
-        name: "bsfd_iperf-server"
+        name: "bsfd_iperf3-server"
         net: host
         pull: always
         restart_policy: on-failure
