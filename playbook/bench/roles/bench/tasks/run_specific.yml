@@ -43,6 +43,9 @@
     PATH: /usr/local/bin:/usr/bin:/bin
   ignore_errors: "{{ benchmark.ignore_errors | default(False) }}"
 
+- name: ({{ benchmark.name }}) remove obsolete local profile
+  local_action: file path="{{ local_profs_dir }}/{{ benchmark.name }}/{{ inventory_hostname }}/{{ output_file_name }}" state=absent
+
 - name: ({{ benchmark.name }}) collect output profile
   fetch:
     dest: "{{ local_profs_dir }}/{{ benchmark.name }}/{{ inventory_hostname }}/"
