@@ -1,6 +1,10 @@
 machine,limits,benchmark,base_result,lower_is_better,result
+issdm-6,with,sysbench_memory_1g_write_rnd,1118.47,False,25461.64
 issdm-6,with,sysbench_memory_read_rnd,1118.40,False,25635.77
+issdm-6,with,sysbench_memory_1g_write_seq,85567.48,False,259232.46
 issdm-6,with,sysbench_cpu_50000,8316.7771,True,396.4112
+issdm-6,with,sysbench_memory_1g_read_seq,86071.23,False,259354.00
+issdm-6,with,sysbench_memory_1g_read_rnd,1123.12,False,25686.88
 issdm-6,with,sysbench_memory_write_rnd,1120.00,False,25161.86
 issdm-6,with,sysbench_cpu_10000,1201.1142,True,43.3559
 issdm-6,with,sysbench_memory_read_seq,85281.88,False,252215.59

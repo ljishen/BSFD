@@ -1,4 +1,10 @@
 ---
+- name: find benchmark configurations
+  include_vars: "{{ item }}"
+  with_first_found:
+   - "bench_configs.yml"
+   - "bench_configs_default.yml"
+
 - name: loop all benchmarks
   include: run.yml
   with_items: "{{ benchmarks }}"

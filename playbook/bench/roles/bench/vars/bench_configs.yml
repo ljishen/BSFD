@@ -1,0 +1,31 @@
+---
+# bench role will first use this configuration file for benchmarks if exists.
+# This file is useful for testing individual benchmark cases.
+# Here is an example.
+
+benchmarks:
+  - name: sysbench
+    desc: "CPU & Memory & File I/O performance test"
+    docker_image: ljishen/sysbench
+    configs:
+      # Memory functions speed test
+      - desc: "Memory functions speed test: memory-total-size=1G, memory-oper=read, memory-access-mode=seq"
+        args:
+          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=seq run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=seq run"
+        output_file_suffix: "memory_1g_read_seq.prof"
+      - desc: "Memory functions speed test: memory-total-size=1G memory-oper=write, memory-access-mode=seq"
+        args:
+          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=seq run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=seq run"
+        output_file_suffix: "memory_1g_write_seq.prof"
+      - desc: "Memory functions speed test: memory-total-size=1G, memory-oper=read, memory-access-mode=rnd"
+        args:
+          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=rnd run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=rnd run"
+        output_file_suffix: "memory_1g_read_rnd.prof"
+      - desc: "Memory functions speed test: memory-total-size=1G memory-oper=write, memory-access-mode=rnd"
+        args:
+          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=rnd run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=rnd run"
+        output_file_suffix: "memory_1g_write_rnd.prof"

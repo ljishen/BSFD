@@ -1,0 +1,30 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+Initializing random number generator from current time
+
+
+Initializing worker threads...
+
+Threads started!
+
+Operations performed: 1048576 (86071.23 ops/sec)
+
+1024.00 MiB transferred (84.05 MiB/sec)
+
+
+General statistics:
+    total time:                          12.1827s
+    total number of events:              1048576
+    total time taken by event execution: 0.9950s
+    response time:
+         min:                                  0.00ms
+         avg:                                  0.00ms
+         max:                                  0.02ms
+         approx.  95 percentile:               0.00ms
+
+Threads fairness:
+    events (avg/stddev):           1048576.0000/0.00
+    execution time (avg/stddev):   0.9950/0.00
+
