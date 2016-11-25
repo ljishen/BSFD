@@ -31,30 +31,47 @@ opts=`echo "$bn" | cut -d _ -f 4-`
 machine=`echo "$bn" | cut -d _ -f 2`
 limits=`echo "$bn" | cut -d _ -f 1`
 
-p_opts_writes="writes/s:\s+\K[\d\.]+"
-
-stats=('writes' 'fsyncs' 'written' 'total time:' 'total number of events:')
-
 pt() {
-    echo "${stats[$1]}\D+\K[\d\.]+"
+    echo "$1\D+\K[\d\.]+"
 }
 
-for (( i=0; i<${#stats[@]}; i++ )); do
-    base_res=`grep -oP "$(pt $i)"  $1`
-    res=`grep -oP "$(pt $i)" $2`
+prt() {
+    echo "$machine,$limits,sysbench_${test_name}_${opts}_$1,$2,False,$3" | tee -a "$4"
+}
 
-    desc="${stats[i]}"
 
-    if [ "${stats[i]}" == "total time:" ]; then
-        (( ++i ))
-        base_evs=`grep -oP "$(pt $i)" $1`
-        evs=`grep -oP "$(pt $i)" $2`
+# calculate events/min
+kw='total number of events:'
+base_evs=`grep -oP "$(pt "$kw")" $1`
+evs=`grep -oP "$(pt "$kw")" $2`
 
-        base_res=`echo "scale=4; ${base_evs}/${base_res}" | bc`
-        res=`echo "scale=4; ${evs}/${res}" | bc`
+kw='total time:'
+base_res=`grep -oP "$(pt "$kw")"  $1`
+res=`grep -oP "$(pt "$kw")" $2`
 
-        desc="event-fq"
-    fi
-    
-    echo "$machine,$limits,sysbench_${test_name}_${opts}_${desc},$base_res,False,$res" | tee -a "$3"
-done
+base_res=`echo "scale=4; ${base_evs}/${base_res}*60" | bc`
+res=`echo "scale=4; ${evs}/${res}*60" | bc`
+
+desc='events_per_min'
+prt "$desc" "$base_res" "$res" "$3"
+
+
+# calculate req/min
+kw='writes/s:'
+base_res=`grep -oP "$(pt "$kw")"  $1`
+res=`grep -oP "$(pt "$kw")" $2`
+
+base_res=`echo "scale=4; ${base_res}*60" | bc`
+res=`echo "scale=4; ${res}*60" | bc`
+
+desc='req_per_min'
+prt "$desc" "$base_res" "$res" "$3"
+
+
+# calculate BW in MiB/s
+kw='written, MiB/s:'
+base_res=`grep -oP "$(pt "$kw")"  $1`
+res=`grep -oP "$(pt "$kw")" $2`
+
+desc='bw_mib_per_sec'
+prt "$desc" "$base_res" "$res" "$3"
