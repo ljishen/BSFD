@@ -9,10 +9,9 @@ issdm-6,with,sysbench_memory_write_rnd,1120.00,False,25161.86
 issdm-6,with,sysbench_cpu_10000,1201.1142,True,43.3559
 issdm-6,with,sysbench_memory_read_seq,85281.88,False,252215.59
 issdm-6,with,sysbench_cpu_2000,190.0134,True,4.8234
-issdm-6,with,sysbench_fileio_seqrewr_writes,1124.67,False,1080.18
-issdm-6,with,sysbench_fileio_seqrewr_fsyncs,1439.57,False,1382.63
-issdm-6,with,sysbench_fileio_seqrewr_written,17.57,False,16.88
-issdm-6,with,sysbench_fileio_seqrewr_event-fq,1124.6696,False,1080.1819
+issdm-6,with,sysbench_fileio_seqrewr_events_per_min,67480.1760,False,64810.9140
+issdm-6,with,sysbench_fileio_seqrewr_req_per_min,67480.20,False,64810.80
+issdm-6,with,sysbench_fileio_seqrewr_bw_mib_per_sec,17.57,False,16.88
 issdm-6,with,sysbench_memory_write_seq,85875.72,False,259629.77
 issdm-6,with,iperf3_tcp_w200k_sender,931,False,938
 issdm-6,with,iperf3_tcp_w200k_receiver,931,False,937
