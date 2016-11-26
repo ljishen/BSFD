@@ -8,24 +8,19 @@ benchmarks:
     desc: "CPU & Memory & File I/O performance test"
     docker_image: ljishen/sysbench
     configs:
-      # Memory functions speed test
-      - desc: "Memory functions speed test: memory-total-size=1G, memory-oper=read, memory-access-mode=seq"
+      # File I/O test
+      - desc: "File I/O test: file preparation - file-num=128, file-total-size=4G"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=seq run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=seq run"
-        output_file_suffix: "memory_1g_read_seq.prof"
-      - desc: "Memory functions speed test: memory-total-size=1G memory-oper=write, memory-access-mode=seq"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
+        output_file_suffix: "fileio_prepare_num_128_size_4g.log"
+      - desc: "File I/O test: run - file-num=128, file-total-size=4G, file-block-size=4K, max-time=240, max-requests=0, num-threads=1, file-test-mode=rndwr"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=seq run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=seq run"
-        output_file_suffix: "memory_1g_write_seq.prof"
-      - desc: "Memory functions speed test: memory-total-size=1G, memory-oper=read, memory-access-mode=rnd"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
+        output_file_suffix: "fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr.prof"
+      - desc: "File I/O test: file cleanup"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=rnd run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=read --memory-access-mode=rnd run"
-        output_file_suffix: "memory_1g_read_rnd.prof"
-      - desc: "Memory functions speed test: memory-total-size=1G memory-oper=write, memory-access-mode=rnd"
-        args:
-          run: "##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=rnd run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-total-size=1G --memory-oper=write --memory-access-mode=rnd run"
-        output_file_suffix: "memory_1g_write_rnd.prof"
+          run: "##OUTPUT_FILE## --test=fileio cleanup"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio cleanup"
+        output_file_suffix: "fileio_cleanup.log"

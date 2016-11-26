@@ -1,6 +1,6 @@
 sysbench 1.0:  multi-threaded system evaluation benchmark
 
-128 files, 16384Kb each, 2048Mb total
+128 files, 32768Kb each, 4096Mb total
 Creating files for the test...
 Extra file open flags: 0
 Creating file test_file.0
@@ -131,4 +131,4 @@ Creating file test_file.124
 Creating file test_file.125
 Creating file test_file.126
 Creating file test_file.127
-2147483648 bytes written in 50.15 seconds (40.83 MiB/sec).
+4294967296 bytes written in 65.64 seconds (62.40 MiB/sec).

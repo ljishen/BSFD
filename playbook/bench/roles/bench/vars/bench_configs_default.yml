@@ -47,16 +47,16 @@ benchmarks:
         output_file_suffix: "memory_write_rnd.prof"
 
       # File I/O test
-      - desc: "File I/O test: file preparation"
+      - desc: "File I/O test: file preparation - file-num=128, file-total-size=4G"
         args:
-          run: "##OUTPUT_FILE## --test=fileio prepare"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio prepare"
-        output_file_suffix: "fileio_prepare.log"
-      - desc: "File I/O test: file-test-mode=seqrewr"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
+        output_file_suffix: "fileio_prepare_num_128_size_4g.log"
+      - desc: "File I/O test: run - file-num=128, file-total-size=4G, file-block-size=4K, max-time=240, max-requests=0, num-threads=1, file-test-mode=rndwr"
         args:
-          run: "##OUTPUT_FILE## --test=fileio --file-test-mode=seqrewr run"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-test-mode=seqrewr run"
-        output_file_suffix: "fileio_seqrewr.prof"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
+        output_file_suffix: "fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr.prof"
       - desc: "File I/O test: file cleanup"
         args:
           run: "##OUTPUT_FILE## --test=fileio cleanup"

@@ -1,5 +1,8 @@
 machine,limits,benchmark,base_result,lower_is_better,result
 issdm-6,with,sysbench_memory_1g_write_rnd,1118.47,False,25461.64
+issdm-6,with,sysbench_fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr_events_per_min,5824.1100,False,8224.3140
+issdm-6,with,sysbench_fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr_req_per_min,5824.20,False,8224.20
+issdm-6,with,sysbench_fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr_bw_mib_per_sec,0.38,False,0.54
 issdm-6,with,sysbench_memory_read_rnd,1118.40,False,25635.77
 issdm-6,with,sysbench_memory_1g_write_seq,85567.48,False,259232.46
 issdm-6,with,sysbench_cpu_50000,8316.7771,True,396.4112
@@ -9,9 +12,6 @@ issdm-6,with,sysbench_memory_write_rnd,1120.00,False,25161.86
 issdm-6,with,sysbench_cpu_10000,1201.1142,True,43.3559
 issdm-6,with,sysbench_memory_read_seq,85281.88,False,252215.59
 issdm-6,with,sysbench_cpu_2000,190.0134,True,4.8234
-issdm-6,with,sysbench_fileio_seqrewr_events_per_min,67480.1760,False,64810.9140
-issdm-6,with,sysbench_fileio_seqrewr_req_per_min,67480.20,False,64810.80
-issdm-6,with,sysbench_fileio_seqrewr_bw_mib_per_sec,17.57,False,16.88
 issdm-6,with,sysbench_memory_write_seq,85875.72,False,259629.77
 issdm-6,with,iperf3_tcp_w200k_sender,931,False,938
 issdm-6,with,iperf3_tcp_w200k_receiver,931,False,937
