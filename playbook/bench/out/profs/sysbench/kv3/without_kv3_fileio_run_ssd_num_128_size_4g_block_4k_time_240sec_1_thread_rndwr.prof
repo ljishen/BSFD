@@ -5,7 +5,7 @@ Number of threads: 1
 Initializing random number generator from current time
 
 
-Extra file open flags: 0
+Extra file open flags: 3
 128 files, 32MiB each
 4GiB total file size
 Block size 4KiB
@@ -22,24 +22,24 @@ Threads started!
 
 File operations:
     reads/s:                      0.00
-    writes/s:                     96.67
-    fsyncs/s:                     123.61
+    writes/s:                     1386.56
+    fsyncs/s:                     1774.27
 
 Throughput:
     read, MiB/s:                  0.00
-    written, MiB/s:               0.38
+    written, MiB/s:               5.42
 
 General statistics:
-    total time:                          240.0028s
-    total number of events:              23200
-    total time taken by event execution: 0.4176s
+    total time:                          240.0186s
+    total number of events:              332800
+    total time taken by event execution: 40.3054s
     response time:
-         min:                                  0.01ms
-         avg:                                  0.02ms
-         max:                                  0.08ms
-         approx.  95 percentile:               0.03ms
+         min:                                  0.09ms
+         avg:                                  0.12ms
+         max:                                 44.57ms
+         approx.  95 percentile:               0.13ms
 
 Threads fairness:
-    events (avg/stddev):           23200.0000/0.00
-    execution time (avg/stddev):   0.4176/0.00
+    events (avg/stddev):           332800.0000/0.00
+    execution time (avg/stddev):   40.3054/0.00
 
