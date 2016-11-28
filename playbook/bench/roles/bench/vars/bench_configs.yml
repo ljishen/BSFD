@@ -13,12 +13,12 @@ benchmarks:
         args:
           run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
           docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
-        output_file_suffix: "fileio_prepare_num_128_size_4g.log"
+        output_file_suffix: "fileio_prepare_ssd_num_128_size_4g.log"
       - desc: "File I/O test: run - file-num=128, file-total-size=4G, file-block-size=4K, max-time=240, max-requests=0, num-threads=1, file-test-mode=rndwr"
         args:
           run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
           docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
-        output_file_suffix: "fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr.prof"
+        output_file_suffix: "fileio_run_ssd_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr.prof"
       - desc: "File I/O test: file cleanup"
         args:
           run: "##OUTPUT_FILE## --test=fileio cleanup"

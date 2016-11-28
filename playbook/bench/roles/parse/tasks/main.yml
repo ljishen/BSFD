@@ -1,9 +1,17 @@
 ---
+- name: check number of hosts
+  fail: msg="Need to specify at least two hosts for the parsing"
+  when: (groups['all'] | length | int) < 2
+
 - name: lookup base host
   include: lookup_base_host.yml
   with_items: "{{ groups['all'] }}"
   loop_control:
     loop_var: check_host
+
+- name: check base host
+  fail: msg="Please set attribute "base=True" to one of the hosts in the inventory file"
+  when: base_host is undefined
 
 - name: find all benchmarks profile folders
   find:
