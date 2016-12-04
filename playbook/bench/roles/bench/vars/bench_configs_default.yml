@@ -52,11 +52,11 @@ benchmarks:
           run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
           docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
         output_file_suffix: "fileio_prepare_num_128_size_4g.log"
-      - desc: "File I/O test: run - file-num=128, file-total-size=4G, file-block-size=4K, max-time=240, max-requests=0, num-threads=1, file-test-mode=rndwr"
+      - desc: "File I/O test: run - file-num=128, file-total-size=4G, max-time=300, max-requests=0, num-threads=1, file-test-mode=rndrw"
         args:
-          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr run"
-        output_file_suffix: "fileio_run_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr.prof"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --max-time=300 --max-requests=0 --num-threads=1 --file-test-mode=rndrw run"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --max-time=300 --max-requests=0 --num-threads=1 --file-test-mode=rndrw run"
+        output_file_suffix: "fileio_run_num_128_size_4g_time_300sec_1_thread_rndrw.prof"
       - desc: "File I/O test: file cleanup"
         args:
           run: "##OUTPUT_FILE## --test=fileio cleanup"
@@ -70,23 +70,28 @@ benchmarks:
     configs:
       - desc: "CPU performance test: class=cpu"
         args:
-          run: "--yaml ##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class cpu --sequential 1"
+          run: "--yaml ##OUTPUT_FILE## --timeout 60s --class cpu --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 60s --class cpu --sequential 1"
         output_file_suffix: "cpu.prof"
+      - desc: "CPU Cache performance test: class=cpu-cache"
+        args:
+          run: "--yaml ##OUTPUT_FILE## --timeout 60s --class cpu-cache --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 60s --class cpu-cache --sequential 1"
+        output_file_suffix: "cpu-cache.prof"
       - desc: "Memory performance test: class=memory"
         args:
-          run: "--yaml ##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class memory --sequential 1"
+          run: "--yaml ##OUTPUT_FILE## --timeout 60s --class memory --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 60s --class memory --sequential 1"
         output_file_suffix: "memory.prof"
       - desc: "I/O performance test: class=io"
         args:
-          run: "--yaml ##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class io --sequential 1"
+          run: "--yaml ##OUTPUT_FILE## --timeout 60s --class io --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 60s --class io --sequential 1"
         output_file_suffix: "io.prof"
       - desc: "Network performance test: class=network"
         args:
-          run: "--yaml ##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
-          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 10 --class network --sequential 1"
+          run: "--yaml ##OUTPUT_FILE## --timeout 60s --class network --sequential 1"
+          docker_run: "--cap-add=SYS_RESOURCE -v `pwd`:/root/results ##CONTAINER_ID## --yaml /root/results/##OUTPUT_FILE## --timeout 60s --class network --sequential 1"
         output_file_suffix: "network.prof"
 
   - name: iperf3
