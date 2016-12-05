@@ -16,6 +16,7 @@ issdm-6,with,sysbench_cpu_10000,1201.1142,True,43.3559
 issdm-6,with,sysbench_memory_read_seq,85281.88,False,252215.59
 issdm-6,with,sysbench_cpu_2000,190.0134,True,4.8234
 issdm-6,with,sysbench_memory_write_seq,85875.72,False,259629.77
+issdm-6,with,sysbench_cpu_20000,2734.7365,True,112.0835
 issdm-6,with,iperf3_tcp_w200k_sender,931,False,938
 issdm-6,with,iperf3_tcp_w200k_receiver,931,False,937
 issdm-6,with,iperf3_tcp_w85k_sender,940,False,937

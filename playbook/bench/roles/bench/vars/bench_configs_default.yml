@@ -18,6 +18,11 @@ benchmarks:
           run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=10000 run"
           docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=10000 run"
         output_file_suffix: "cpu_10000.prof"
+      - desc: "CPU performance test: max-prime=20000"
+        args:
+          run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=20000 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=cpu --cpu-max-prime=20000 run"
+        output_file_suffix: "cpu_20000.prof"
       - desc: "CPU performance test: max-prime=50000"
         args:
           run: "##OUTPUT_FILE## --test=cpu --cpu-max-prime=50000 run"
