@@ -28,8 +28,8 @@ if [ ! -f $FOLDER_NAME/pmbw ]; then
         read -p "Do you wish to install pmbw (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pmbw/${VERSION}.zip
-                unzip ${VERSION}.zip
+                wget -O ${VERSION}.zip https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pmbw/${VERSION}.zip
+                unzip -qo ${VERSION}.zip
                 rm ${VERSION}.zip
                 mv pmbw-master $FOLDER_NAME
                 cd $FOLDER_NAME

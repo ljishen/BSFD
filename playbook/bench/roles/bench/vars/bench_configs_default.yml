@@ -6,7 +6,6 @@ benchmarks:
   - name: sysbench
     desc: "CPU & Memory & File I/O performance test"
     docker_image: ljishen/sysbench
-    skip: True
     configs:
       # CPU performance test
       - desc: "CPU performance test: max-prime=2000"
@@ -67,7 +66,6 @@ benchmarks:
   - name: stress-ng
     desc: "CPU & Memory & I/O & Network performance test"
     docker_image: ljishen/stress-ng
-    skip: True
     ignore_errors: True
     configs:
       - desc: "CPU performance test: class=cpu"
@@ -103,7 +101,8 @@ benchmarks:
       - desc: "Memory Bandwidth test: (maximum amount of memory allocated at startup)=1G, (Run benchmarks with at most this thread count)=1"
         args:
           run: "pmbw ##OUTPUT_FILE## -M 1073741824 -P 1"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## pmbw /root/results/##OUTPUT_FILE## -M 1073741824 -P 1"
+          # use the Docker host network stack because we need to set the host name correctly in the result file, or else the container id is used.
+          docker_run: "--network host -v `pwd`:/root/results ##CONTAINER_ID## pmbw /root/results/##OUTPUT_FILE## -M 1073741824 -P 1"
         output_file_suffix: "memory_m1_p1.prof"
 
   - name: iperf3

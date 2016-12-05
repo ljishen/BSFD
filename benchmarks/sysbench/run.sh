@@ -30,7 +30,7 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/$FOLDER_NAME/sysbench ]; then
         case $yn in
             [Yy]* )
                 wget -O ${VERSION}.zip https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/sysbench/${VERSION}.zip
-                unzip -o ${VERSION}.zip && rm ${VERSION}.zip
+                unzip -qo ${VERSION}.zip && rm ${VERSION}.zip
                 cd ${FOLDER_NAME}-${VERSION}
                 chmod +x autogen.sh
                 ./autogen.sh

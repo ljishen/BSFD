@@ -14,8 +14,8 @@ if [ ! -f $FOLDER_NAME/interbench ]; then
         read -p "Do you wish to install Interbench? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://github.com/Mustaavalkosta/interbench/archive/master.zip
-                unzip master.zip
+                wget -O master.zip https://github.com/Mustaavalkosta/interbench/archive/master.zip
+                unzip -qo master.zip
                 rm master.zip
                 mv interbench-master $FOLDER_NAME
                 make -C $FOLDER_NAME

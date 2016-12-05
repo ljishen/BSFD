@@ -6,6 +6,7 @@
   package:
     name: gnuplot
     state: latest
+  become: yes
   when: benchmark_name == "pmbw"
 
 - name: ({{ benchmark_name }}) parse profiles by host

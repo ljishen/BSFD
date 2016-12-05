@@ -20,8 +20,8 @@ fi
 # Since pmbw provides the stats2gnuplot program for visualizing the statistical output, we use it directly.
 
 run_script=$(dirname $(readlink -f $0))/run.sh
-${run_script} stats2gnuplot "$1"
-${run_script} stats2gnuplot "$2"
+yes | ${run_script} stats2gnuplot "$1"
+yes | ${run_script} stats2gnuplot "$2"
 
 base_host=`grep -oP -m1 "host=\K[^\s]+" "$1"`
 host=`grep -oP -m1 "host=\K[^\s]+" "$2"`

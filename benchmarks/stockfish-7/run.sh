@@ -24,8 +24,8 @@ if [ ! -f $FOLDER_NAME/src/stockfish ]; then
         read -p "Do you wish to install Stockfish 7? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://stockfish.s3.amazonaws.com/$FOLDER_NAME-src.zip
-                unzip -q $FOLDER_NAME-src.zip
+                wget -O $FOLDER_NAME-src.zip https://stockfish.s3.amazonaws.com/$FOLDER_NAME-src.zip
+                unzip -qo $FOLDER_NAME-src.zip
                 mv $FOLDER_NAME-src $FOLDER_NAME
                 rm $FOLDER_NAME-src.zip
 
