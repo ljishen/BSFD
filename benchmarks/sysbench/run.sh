@@ -37,6 +37,7 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/$FOLDER_NAME/sysbench ]; then
                 ./configure --without-mysql
                 make
                 cd ..
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

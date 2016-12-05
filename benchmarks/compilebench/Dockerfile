@@ -1,4 +1,4 @@
-# VERSION 1.1
+# VERSION 1.2
 
 FROM python:2-slim
 
@@ -10,12 +10,13 @@ RUN apt-get update \
         wget
 
 ENV FOLDER_NAME compilebench
+ENV VERSION 0.6
 
 WORKDIR /root
-RUN wget https://oss.oracle.com/~mason/compilebench/$FOLDER_NAME-0.6.tar.bz2 \
-    && tar -xf $FOLDER_NAME-0.6.tar.bz2 \
-    && mv $FOLDER_NAME-0.6 $FOLDER_NAME \
-    && rm $FOLDER_NAME-0.6.tar.bz2
+RUN mkdir ${FOLDER_NAME} \
+    && wget https://oss.oracle.com/~mason/compilebench/${FOLDER_NAME}-${VERSION}.tar.bz2 \
+    && tar -xf ${FOLDER_NAME}-${VERSION}.tar.bz2 -C $FOLDER_NAME --strip-components=1 \
+    && rm ${FOLDER_NAME}-${VERSION}.tar.bz2
 
 # Clean Up
 RUN apt-get clean \

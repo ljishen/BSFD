@@ -19,7 +19,7 @@ if [ ! -f $FOLDER_NAME/SearchGame ]; then
                 tar -xf Fhourstones.tar.gz -C $FOLDER_NAME
                 rm Fhourstones.tar.gz
                 gcc -O $FOLDER_NAME/SearchGame.c -o $FOLDER_NAME/SearchGame
-                echo "Successfully install ${FOLDER_NAME}."
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

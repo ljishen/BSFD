@@ -5,8 +5,6 @@ if [ "$#" -lt 2 ]; then
 Please specify a working directory and the output file as argument.
 Usage: ./run.sh <output file> <working directory> [OPTION]
 
-Compilebench version: 0.6
-
 Options:
   -h, --help            show this help message and exit
   -b BUFFER_SIZE, --buffer-size=BUFFER_SIZE
@@ -24,21 +22,26 @@ Options:
                         blktrace device
   -m, --makej           simulate a make -j on the initial dirs and exit
   -n, --no-sync         don't sync and drop caches between each iteration
+
+Examples:
+./run.sh output.prof /tmp/compilebench --help
 ENDOFMESSAGE
     exit
 fi
 
 FOLDER_NAME=${FOLDER_NAME:-compilebench}
-if [ ! -f $FOLDER_NAME/compilebench ]; then
+VERSION=${VERSION:-0.6}
+
+if [ ! -f ${FOLDER_NAME}/compilebench ]; then
     while true; do
-        read -p "Do you wish to install Compilebench v0.6? [y/n] " yn
+        read -p "Do you wish to install Compilebench v${VERSION}? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://oss.oracle.com/~mason/compilebench/$FOLDER_NAME-0.6.tar.bz2
-                tar -xf $FOLDER_NAME-0.6.tar.bz2
-                mv $FOLDER_NAME-0.6 $FOLDER_NAME
-                rm $FOLDER_NAME-0.6.tar.bz2
-                echo "Successfully install ${FOLDER_NAME}."
+                wget https://oss.oracle.com/~mason/compilebench/${FOLDER_NAME}-${VERSION}.tar.bz2
+                mkdir $FOLDER_NAME
+                tar -xf ${FOLDER_NAME}-${VERSION}.tar.bz2 -C $FOLDER_NAME --strip-components=1
+                rm ${FOLDER_NAME}-${VERSION}.tar.bz2
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

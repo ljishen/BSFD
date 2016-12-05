@@ -19,7 +19,7 @@ if [ ! -f $FOLDER_NAME/nbench ]; then
                 mv $FOLDER_NAME-byte-2.2.3 $FOLDER_NAME
                 rm $FOLDER_NAME-byte-2.2.3.tar.gz
                 make -C $FOLDER_NAME
-                echo "Successfully install ${FOLDER_NAME}."
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

@@ -34,7 +34,7 @@ if [ ! -f $FOLDER_NAME/ramsmp ]; then
                 cd $FOLDER_NAME
                 ./build.sh
                 cd ..
-                echo "Successfully install ${FOLDER_NAME}."
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

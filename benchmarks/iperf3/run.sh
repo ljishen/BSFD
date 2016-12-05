@@ -33,6 +33,7 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/src/iperf3 ]; then
                 cd ${FOLDER_NAME}-${VERSION}
                 ./configure; make
                 cd ..
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

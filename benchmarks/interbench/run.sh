@@ -19,7 +19,7 @@ if [ ! -f $FOLDER_NAME/interbench ]; then
                 rm master.zip
                 mv interbench-master $FOLDER_NAME
                 make -C $FOLDER_NAME
-                echo "Successfully install ${FOLDER_NAME}."
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

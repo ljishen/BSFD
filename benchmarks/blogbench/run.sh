@@ -21,7 +21,7 @@ if ! command -v blogbench >/dev/null 2>&1; then
                 make install-strip
                 cd ..
                 rm -rf $FOLDER_NAME $FOLDER_NAME.tar.gz
-                echo "Successfully install ${FOLDER_NAME}."
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )

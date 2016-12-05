@@ -17,7 +17,7 @@ if [ ! -f $FOLDER_NAME/pybench.py ]; then
                 wget https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pybench/pybench-r89074.tar.gz
                 tar -xf pybench-r89074.tar.gz
                 rm pybench-r89074.tar.gz
-                echo "Successfully install ${FOLDER_NAME}."
+                echo "Successfully installed ${FOLDER_NAME}."
                 break
                 ;;
             [Nn]* )
