@@ -31,12 +31,12 @@ base_res_dir="$(dirname $(readlink -f $1))"
 res_dir="$(dirname $(readlink -f $2))"
 
 if [ "${base_res_dir}" != "${out_file_dir}" ]; then
-    cp "${base_res_dir}"/plots-${base_host}.pdf "${out_file_dir}"
+    cp "${base_res_dir}"/plots-${base_host}.pdf "${out_file_dir}"/pmbw-plots-${base_host}.pdf
     rm "${base_res_dir}"/plots-${base_host}.pdf
 fi
 
 if [ "${res_dir}" != "${out_file_dir}" ]; then
-    cp "${res_dir}"/plots-${host}.pdf "${out_file_dir}"
+    cp "${res_dir}"/plots-${host}.pdf "${out_file_dir}"/pmbw-plots-${host}.pdf
     rm "${res_dir}"/plots-${host}.pdf
 fi
 
