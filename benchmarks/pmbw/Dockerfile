@@ -14,7 +14,8 @@ ENV VERSION 4a3b377
 ENV FOLDER_NAME pmbw
 
 WORKDIR /root
-RUN wget https://github.com/ljishen/BSFD/blob/master/benchmarks/pmbw/${VERSION}.zip \
+
+RUN wget https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pmbw/${VERSION}.zip \
     && unzip ${VERSION}.zip \
     && rm ${VERSION}.zip \
     && mv pmbw-master $FOLDER_NAME

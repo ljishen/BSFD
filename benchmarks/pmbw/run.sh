@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-if [ "$#" -lt 2 ]; then
+if [ "$#" -lt 2 ] || ([ "$1" != "pmbw" ] && [ "$1" != "stats2gnuplot" ]); then
     cat <<-ENDOFMESSAGE
-Please specify the program and the output file as arguments.
-Usage: ./run.sh <pmbw|stats2gnuplot> <output file> [options]
+Please specify the program name and the output file (-n) as arguments.
+Usage: ./run.sh <pmbw|stats2gnuplot> <stats file> [options]
 Options:
   -f <match>     Run only benchmarks containing this substring, can be used multile times. Try "list".
   -M <size>      Limit the maximum amount of memory allocated at startup [byte].
@@ -13,6 +13,10 @@ Options:
   -Q             Run benchmarks with quadratically increasing thread count.
   -s <size>      Limit the _minimum_ test array size [byte]. Set to 0 for no limit.
   -S <size>      Limit the _maximum_ test array size [byte]. Set to 0 for no limit.
+
+Examples:
+./run.sh pmbw stats.prof -S 0
+./run stats2gnuplot stats.prof
 ENDOFMESSAGE
     exit
 fi
@@ -24,13 +28,12 @@ if [ ! -f $FOLDER_NAME/pmbw ]; then
         read -p "Do you wish to install pmbw (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://github.com/ljishen/BSFD/blob/master/benchmarks/pmbw/${VERSION}.zip
+                wget https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pmbw/${VERSION}.zip
                 unzip ${VERSION}.zip
                 rm ${VERSION}.zip
                 mv pmbw-master $FOLDER_NAME
                 cd $FOLDER_NAME
-                chmod +x configure
-                ./configure && make
+                chmod +x configure && ./configure && make
                 cd ..
                 echo "Successfully installed ${FOLDER_NAME}."
                 break
@@ -45,19 +48,19 @@ if [ ! -f $FOLDER_NAME/pmbw ]; then
     done
 fi
 
-OUTPUT_DIR="$(dirname "$2")"
-mkdir -p ${OUTPUT_FILE}
-
 if [ "$1" == "pmbw" ]; then
+    mkdir -p "$(dirname $2)"
     $FOLDER_NAME/$1 "${@:3}" | tee "$2"
-    # copy stats.txt to the same directory as output file
-    STATS_FILE="stats.txt"
-    cp "${STATS_FILE}" /tmp/
-    rm "${STATS_FILE}"
-    cp /tmp/"${STATS_FILE}" "${OUTPUT_DIR}"
-    rm /tmp/"${STATS_FILE}"
-elif [ "$1" == "stats2gnuplot" ]; then
-    $FOLDER_NAME/$1 stats2gnuplot "${OUTPUT_DIR}"/stats.txt | gnuplot | tee "$2"
+    rm stats.txt
 else
-    echo "Available programs are: \"pmbw\" and \"stats2gnuplot\""
+    $FOLDER_NAME/"$1" "$2" | gnuplot
+
+    # copy the plots-<host>.pdf to the same dir as the stats file
+    script_path=`dirname $(readlink -f $0)`
+    stats_file_path=`dirname $(readlink -f $2)`
+    if [ "${script_path}" != "${stats_file_path}" ]; then
+        host=`grep -oP -m1 "host=\K[^\s]+" "$2"`
+        cp plots-${host}.pdf "${stats_file_path}"
+        rm plots-${host}.pdf
+    fi
 fi

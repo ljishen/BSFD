@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+# The script arguments requirement is just for matching the convention of Benchmark Collections in this repository.
+
 if [ "$#" -ne 3 ]; then
     cat <<-ENDOFMESSAGE
 Please specify the base result file and the result file, as well as the output file as arguments.
@@ -15,18 +17,28 @@ if [ ! -f "$3" ] || ! grep -q "$header" "$3"; then
     echo "$header" | tee "$3"
 fi
 
-bn=`basename "$2" ".prof"`
-machine=`echo "$bn" | cut -d _ -f 2`
-limits=`echo "$bn" | cut -d _ -f 1`
+# Since pmbw provides the stats2gnuplot program for visualizing the statistical output, we use it directly.
 
-p_w='^Final score for writes:\s+\K\d+'
-p_r='^Final score for reads :\s+\K\d+'
+run_script=$(dirname $(readlink -f $0))/run.sh
+${run_script} stats2gnuplot "$1"
+${run_script} stats2gnuplot "$2"
 
-base_res_w=`grep -oP "$p_w" "$1"`
-base_res_r=`grep -oP "$p_r" "$1"`
+base_host=`grep -oP -m1 "host=\K[^\s]+" "$1"`
+host=`grep -oP -m1 "host=\K[^\s]+" "$2"`
 
-res_w=`grep -oP "$p_w" "$2"`
-res_r=`grep -oP "$p_r" "$2"`
+out_file_dir="$(dirname "$3")"
+base_res_dir="$(dirname $(readlink -f $1))"
+res_dir="$(dirname $(readlink -f $2))"
 
-echo "$machine,$limits,blogbench_writes,$base_res_w,False,$res_w" | tee -a "$3"
-echo "$machine,$limits,blogbench_reads,$base_res_r,False,$res_r" | tee -a "$3"
+if [ "${base_res_dir}" != "${out_file_dir}" ]; then
+    cp "${base_res_dir}"/plots-${base_host}.pdf "${out_file_dir}"
+    rm "${base_res_dir}"/plots-${base_host}.pdf
+fi
+
+if [ "${res_dir}" != "${out_file_dir}" ]; then
+    cp "${res_dir}"/plots-${host}.pdf "${out_file_dir}"
+    rm "${res_dir}"/plots-${host}.pdf
+fi
+
+# clean up
+rm -rf pmbw
