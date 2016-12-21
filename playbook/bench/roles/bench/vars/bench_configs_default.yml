@@ -47,16 +47,16 @@ benchmarks:
         output_file_suffix: "memory_1k_write_rnd.prof"
 
       # File I/O test
-      - desc: "File I/O test: file preparation - file-num=128, file-total-size=4G"
+      - desc: "File I/O test: file preparation - file-num=128, file-total-size=100G"
         args:
-          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
-        output_file_suffix: "fileio_prepare_num_128_size_4g.log"
-      - desc: "File I/O test: run - file-num=128, file-total-size=4G, max-time=300, max-requests=0, num-threads=1, file-test-mode=rndrw"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=100G prepare"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=100G prepare"
+        output_file_suffix: "fileio_prepare_num_128_size_100g.log"
+      - desc: "File I/O test: run - file-num=128, file-total-size=100G, max-time=300, max-requests=0, num-threads=1, file-test-mode=rndrw"
         args:
-          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --max-time=300 --max-requests=0 --num-threads=1 --file-test-mode=rndrw run"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --max-time=300 --max-requests=0 --num-threads=1 --file-test-mode=rndrw run"
-        output_file_suffix: "fileio_run_num_128_size_4g_time_300sec_1_thread_rndrw.prof"
+          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=100G --max-time=300 --max-requests=0 --num-threads=1 --file-test-mode=rndrw run"
+          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=100G --max-time=300 --max-requests=0 --num-threads=1 --file-test-mode=rndrw run"
+        output_file_suffix: "fileio_run_num_128_size_100g_time_300sec_1_thread_rndrw.prof"
       - desc: "File I/O test: file cleanup"
         args:
           run: "##OUTPUT_FILE## --test=fileio cleanup"
