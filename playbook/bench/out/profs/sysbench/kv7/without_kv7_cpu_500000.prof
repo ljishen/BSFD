@@ -1,0 +1,28 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 1
+Initializing random number generator from current time
+
+
+Prime numbers limit: 500000
+
+Initializing worker threads...
+
+Threads started!
+
+
+General statistics:
+    total time:                          161753.9656s
+    total number of events:              10000
+    total time taken by event execution: 161753.7613s
+    response time:
+         min:                              15698.42ms
+         avg:                              16175.38ms
+         max:                              16643.64ms
+         approx.  95 percentile:           16483.98ms
+
+Threads fairness:
+    events (avg/stddev):           10000.0000/0.00
+    execution time (avg/stddev):   161753.7613/0.00
+

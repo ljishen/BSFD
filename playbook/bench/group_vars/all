@@ -2,4 +2,4 @@
 local_profs_dir: "{{ playbook_dir }}/out/profs"
 local_res_file: "{{ playbook_dir }}/out/results/parse_res.prof"
 
-iperf3_server: 192.168.140.130
+iperf3_server: issdm-10

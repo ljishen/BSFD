@@ -1,6 +1,6 @@
-# VERSION 1.0
+# VERSION 1.1
 
-FROM ubuntu:latest
+FROM phusion/baseimage:0.9.19
 
 MAINTAINER Jianshen Liu <jliu120@ucsc.edu>
 
@@ -29,4 +29,4 @@ EXPOSE 5201
 
 WORKDIR /root
 COPY run.sh .
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["/sbin/my_init", "--skip-startup-files", "--quiet", "--", "./run.sh"]

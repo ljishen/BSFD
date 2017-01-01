@@ -48,4 +48,4 @@ fi
 
 rm -f "$1"
 mkdir -p $(dirname "$1")
-${FOLDER_NAME}-${VERSION}/src/iperf3 --affinity 1 --format m --logfile "$1" "${@:2}"
+${FOLDER_NAME}-${VERSION}/src/iperf3 --verbose --affinity 1 --format m --logfile "$1" "${@:2}"

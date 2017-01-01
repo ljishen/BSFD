@@ -11,3 +11,8 @@
   loop_control:
     loop_var: benchmark
   when: not ( benchmark.skip | default(False) )
+
+- name: clean remote workdir
+  file:
+    path: "{{ remote_workdir }}"
+    state: absent

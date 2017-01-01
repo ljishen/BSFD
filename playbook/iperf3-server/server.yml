@@ -15,4 +15,4 @@
         state: "{{ state | default('restarted') }}"
         volumes:
           - /tmp/BSFD/iperf3:/root/iperf3
-        command: /root/iperf3/status.log -s --bind {{ ansible_default_ipv4['address'] }}
+        command: /root/iperf3/status.log --server --bind {{ ansible_default_ipv4['address'] }}

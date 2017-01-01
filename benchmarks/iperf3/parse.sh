@@ -39,8 +39,8 @@ pb="grep -oP [\d\.]+(?=\sMbits/sec)"
 if [ "${prot}" == "tcp" ]; then
     roles=('sender' 'receiver')
     for role in "${roles[@]}"; do
-        base_res=$(grep "${role}" $1 | ${pb})
-        res=$(grep "${role}" $2 | ${pb})
+        base_res=$(grep "${role}$" $1 | ${pb})
+        res=$(grep "${role}$" $2 | ${pb})
 
         echo "$machine,$limits,iperf3_${prot}_${opts}_${role},$base_res,False,$res" | tee -a "$3"
     done

@@ -7,5 +7,10 @@
   set_fact:
     base_file: "{{ base_file | regex_replace('with', 'without') }}"
 
+- name: ({{ benchmark_name }}) ({{ cur_host }}) ({{ file.path }}) retrieves facts for file {{ base_file }}
+  stat: path="{{ base_file }}"
+  register: base_file_facts
+
 - name: ({{ benchmark_name }}) ({{ cur_host }}) ({{ file.path }}) parse file and save result
   command: ../../benchmarks/{{ benchmark_name }}/parse.sh "{{ base_file }}" "{{ file.path }}" "{{ local_res_file }}"
+  when: base_file_facts.stat.exists

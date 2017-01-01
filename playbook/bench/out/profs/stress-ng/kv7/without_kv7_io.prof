@@ -1,0 +1,79 @@
+---
+system-info:
+      stress-ng-version: 0.07.00
+      run-by: unknown
+      date-yyyy-mm-dd: 2016:12:31
+      time-hh-mm-ss: 17:31:44
+      epoch-secs: 1483205504
+      hostname: kv7
+      sysname: Linux
+      nodename: kv7
+      release: 3.10.20-rt14katana_v1.0.3+AUTOINC+84a91af059
+      version: #1 SMP Tue Dec 22 19:22:02 PST 2015
+      machine: mips64
+      uptime: 17070254
+      totalram: 2013986816
+      freeram: 1562886144
+      sharedram: 0
+      bufferram: 191414272
+      totalswap: 0
+      freeswap: 0
+      pagesize: 4096
+      cpus: 4
+      cpus-online: 4
+      ticks-per-second: 100
+
+metrics:
+    - stressor: aio
+      bogo-ops: 7222246
+      bogo-ops-per-second-usr-sys-time: 72959.349429
+      bogo-ops-per-second-real-time: 120292.131696
+      wall-clock-time: 60.039222
+      user-time: 19.940000
+      system-time: 79.050000
+
+    - stressor: hdd
+      bogo-ops: 327680
+      bogo-ops-per-second-usr-sys-time: 5581.331971
+      bogo-ops-per-second-real-time: 5342.666895
+      wall-clock-time: 61.332665
+      user-time: 0.360000
+      system-time: 58.350000
+
+    - stressor: readahead
+      bogo-ops: 4432
+      bogo-ops-per-second-usr-sys-time: 72.763093
+      bogo-ops-per-second-real-time: 72.472698
+      wall-clock-time: 61.154064
+      user-time: 5.590000
+      system-time: 55.320000
+
+    - stressor: seek
+      bogo-ops: 4876522
+      bogo-ops-per-second-usr-sys-time: 81944.580743
+      bogo-ops-per-second-real-time: 81209.910363
+      wall-clock-time: 60.048361
+      user-time: 3.310000
+      system-time: 56.200000
+
+    - stressor: sync-file
+      bogo-ops: 479
+      bogo-ops-per-second-usr-sys-time: 28.292971
+      bogo-ops-per-second-real-time: 7.979171
+      wall-clock-time: 60.031299
+      user-time: 1.510000
+      system-time: 15.420000
+
+times:
+      run-time: 302.627360
+      available-cpu-time: 1210.509439
+      user-time: 30.709999
+      system-time: 264.339996
+      total-time: 295.049988
+      user-time-percent: 2.536948
+      system-time-percent: 21.837087
+      total-time-percent: 24.374034
+      load-average-1-minute: 1.630000
+      load-average-5-minute: 1.240000
+      load-average-15-minute: 1.350000
+...

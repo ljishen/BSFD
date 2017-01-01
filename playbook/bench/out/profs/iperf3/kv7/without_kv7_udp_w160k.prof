@@ -1,9 +1,9 @@
 iperf 3.1.3
-Linux d8247a904099 3.13.0-105-generic #152-Ubuntu SMP Fri Dec 2 15:37:11 UTC 2016 x86_64
-Time: Sun, 01 Jan 2017 01:55:43 GMT
+Linux kv7 3.10.20-rt14katana_v1.0.3+AUTOINC+84a91af059 #1 SMP Tue Dec 22 19:22:02 PST 2015 mips64
+Time: Sun, 01 Jan 2017 01:56:05 GMT
 Connecting to host issdm-10, port 5201
-      Cookie: d8247a904099.1483235743.322422.4db03
-[  5] local 172.17.0.2 port 55201 connected to 192.168.140.130 port 5201
+      Cookie: kv7.1483235765.149892.55b79ec3630a4d
+[  5] local 192.168.140.207 port 56194 connected to 192.168.140.130 port 5201
 Starting Test: protocol: UDP, 1 streams, 8192 byte blocks, omitting 0 seconds, 20 second test
 [ ID] Interval           Transfer     Bandwidth       Total Datagrams
 [  5]   0.00-1.00   sec   128 KBytes  1.05 Mbits/sec  16  
@@ -29,8 +29,8 @@ Starting Test: protocol: UDP, 1 streams, 8192 byte blocks, omitting 0 seconds, 2
 - - - - - - - - - - - - - - - - - - - - - - - - -
 Test Complete. Summary Results:
 [ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
-[  5]   0.00-20.00  sec  2.50 MBytes  1.05 Mbits/sec  0.060 ms  0/320 (0%)  
+[  5]   0.00-20.00  sec  2.50 MBytes  1.05 Mbits/sec  0.062 ms  0/320 (0%)  
 [  5] Sent 320 datagrams
-CPU Utilization: local/sender 0.3% (0.0%u/0.2%s), remote/receiver 0.0% (0.0%u/0.0%s)
+CPU Utilization: local/sender 0.2% (0.1%u/0.1%s), remote/receiver 0.1% (0.0%u/0.1%s)
 
 iperf Done.

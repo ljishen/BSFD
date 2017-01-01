@@ -3,4 +3,4 @@
 issdm-6                 ansible_ssh_user=issdm
 
 [docker_incompatible]
-kv3                     ansible_ssh_user=root   base=True
+kv7                     ansible_ssh_user=root   base=True

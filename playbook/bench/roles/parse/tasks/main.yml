@@ -19,15 +19,15 @@
     paths: "{{ local_profs_dir }}"
   register: find_benchmark_folders_out
 
-- name: clean result folder
-  file:
-    path: "{{ local_res_file | dirname }}"
-    state: absent
-
 - name: ensure result folder exists
   file:
     path: "{{ local_res_file | dirname }}"
     state: directory
+
+- name: remove old result file
+  file:
+    path: "{{ local_res_file }}"
+    state: absent
 
 - name: parse profiles by benchmark
   include: parse_by_benchmark.yml

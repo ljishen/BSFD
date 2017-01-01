@@ -108,7 +108,6 @@ benchmarks:
   - name: iperf3
     desc: "Network bandwidth performance test"
     docker_image: ljishen/iperf3
-    skip: True
     configs:
       - desc: "Network bandwidth test: UDP, 160 KByte socket buffer size"
         args:
@@ -118,7 +117,6 @@ benchmarks:
       - desc: "Network bandwidth test: TCP, 2 KByte window size"
         args:
             run: "##OUTPUT_FILE## --client {{ iperf3_server }} --time 20 --window 2k"
-            # FIXME: Error message "iperf3: error - the server is busy running a test. try again later" when execute docker run a second time
             docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --client {{ iperf3_server }} --time 20 --window 2k"
         output_file_suffix: "tcp_w2k.prof"
       - desc: "Network bandwidth test: TCP, 85 KByte window size"

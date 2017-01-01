@@ -10,5 +10,5 @@ This playbook has three roles:
 #### Usage
 Check all the hosts in the inventory file (hosts), then
 ```bash
-ansible-playbook bench.yml
+ansible-playbook --forks=1 bench.yml
 ```
