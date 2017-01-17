@@ -1,6 +1,7 @@
 # Ansible Playbook
 *.retry
 *.log
+angstwad.docker_ubuntu
 
 # IPython Notebook
 .ipynb_checkpoints

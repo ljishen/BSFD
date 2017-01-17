@@ -25,26 +25,26 @@ benchmarks:
         output_file_suffix: "cpu_1000k.prof"
  
       # Memory functions speed test
-      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=read, memory-access-mode=seq, num-threads=1"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=read, memory-access-mode=seq, max-time=300, max-requests=0 num-threads=1"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=seq --num-threads=1 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=seq --num-threads=1 run"
-        output_file_suffix: "memory_1k_read_seq_threads_1.prof"
-      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=write, memory-access-mode=seq, num-threads=1"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=1 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=1 run"
+        output_file_suffix: "memory_1k_read_seq_time_300sec_threads_1.prof"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=write, memory-access-mode=seq, max-time=300, max-requests=0, num-threads=1"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=seq --num-threads=1 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=seq --num-threads=1 run"
-        output_file_suffix: "memory_1k_write_seq_threads_1.prof"
-      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=read, memory-access-mode=rnd, num-threads=1"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=1 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=1 run"
+        output_file_suffix: "memory_1k_write_seq_time_300sec_threads_1.prof"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=read, memory-access-mode=rnd, max-time=300, max-requests=0, num-threads=1"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=rnd --num-threads=1 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=rnd --num-threads=1 run"
-        output_file_suffix: "memory_1k_read_rnd_threads_1.prof"
-      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=write, memory-access-mode=rnd, num-threads=1"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=1 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=1 run"
+        output_file_suffix: "memory_1k_read_rnd_time_300sec_threads_1.prof"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=write, memory-access-mode=rnd, max-time=300, max-requests=0, num-threads=1"
         args:
-          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K, --memory-oper=write --memory-access-mode=rnd --num-threads=1 run"
-          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=rnd --num-threads=1 run"
-        output_file_suffix: "memory_1k_write_rnd_threads_1.prof"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K, --memory-oper=write --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=1 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=1 run"
+        output_file_suffix: "memory_1k_write_rnd_time_300sec_threads_1.prof"
 
       # File I/O test
       - desc: "File I/O test: file preparation - file-num=128, file-total-size=100G"

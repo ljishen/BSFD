@@ -1,4 +1,37 @@
 ---
+- hosts: all
+  gather_facts: false
+
+  # The following tasks are copy from
+  # https://github.com/ceph/ceph-ansible/blob/3b014df6c00be1be0c9b194f6eb9aec10ff38086/site.yml.sample
+  tasks:
+    # If we can't get python2 installed before any module is used we will fail
+    # so just try what we can to get it installed
+    - name: check for python2
+      stat:
+        path: /usr/bin/python
+      ignore_errors: yes
+      register: systempython2
+    - name: install python2 for Debian based systems
+      raw: sudo apt-get -y install python-simplejson
+      ignore_errors: yes
+      when: systempython2.stat.exists is undefined or systempython2.stat.exists == false
+    # Try to install python2 on Fedora > 23
+    - name: install python2 for Fedora
+      raw: sudo dnf -y install python creates=/usr/bin/python
+      ignore_errors: yes
+      when: systempython2.stat.exists is undefined or systempython2.stat.exists == false
+    - name: gathering facts
+      setup:
+    - name: install required packages for Fedora > 23
+      raw: sudo dnf -y install python2-dnf libselinux-python ntp
+      when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 23
+
+- hosts: docker_compatible
+  become: True
+  roles:
+    - { role: angstwad.docker_ubuntu, pip_install_docker_compose: false, update_docker_package: yes }
+
 - name: run benchmark
   hosts: all
   gather_facts: false

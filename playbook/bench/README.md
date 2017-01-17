@@ -8,6 +8,12 @@ This playbook has three roles:
 - show - get ready to visualize all benchmark results by launching a scipy-notebook docker container
 
 #### Usage
+Install roles included in requirements.yml
+
+```bash
+ansible-galaxy install -r requirements.yml
+```
+
 Check all the hosts in the inventory file (hosts), then
 ```bash
 ansible-playbook --forks=1 bench.yml

@@ -5,10 +5,10 @@
   when: inventory_hostname in groups['docker_compatible']
 
 - name: ({{ benchmark.name }}) kill any obsolete containers
-  docker:
-    image: "{{ benchmark.docker_image }}"
+  docker_container:
     name: "{{ container_name }}"
-    state: killed
+    state: absent
+    force_kill: yes
   when: inventory_hostname in groups['docker_compatible']
 
 - name: ({{ benchmark.name }}) set facts for docker incompatible machine
