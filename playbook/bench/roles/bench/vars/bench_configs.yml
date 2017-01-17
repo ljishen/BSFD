@@ -8,19 +8,24 @@ benchmarks:
     desc: "CPU & Memory & File I/O performance test"
     docker_image: ljishen/sysbench
     configs:
-      # File I/O test
-      - desc: "File I/O test: file preparation - file-num=128, file-total-size=4G"
+      # Memory functions speed test
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=read, memory-access-mode=seq, max-time=300, max-requests=0 num-threads=2"
         args:
-          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G prepare"
-        output_file_suffix: "fileio_prepare_ssd_num_128_size_4g.log"
-      - desc: "File I/O test: run - file-num=128, file-total-size=4G, file-block-size=4K, max-time=240, max-requests=0, num-threads=1, file-test-mode=rndwr, file-extra-flags={sync,direct}"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=2 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=2 run"
+        output_file_suffix: "memory_1k_read_seq_time_300sec_threads_2.prof"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=write, memory-access-mode=seq, max-time=300, max-requests=0, num-threads=2"
         args:
-          run: "##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr --file-extra-flags={sync,direct} run"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio --file-num=128 --file-total-size=4G --file-block-size=4K --max-time=240 --max-requests=0 --num-threads=1 --file-test-mode=rndwr --file-extra-flags={sync,direct} run"
-        output_file_suffix: "fileio_run_ssd_num_128_size_4g_block_4k_time_240sec_1_thread_rndwr.prof"
-      - desc: "File I/O test: file cleanup"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=2 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=seq --max-time=300 --max-requests=0 --num-threads=2 run"
+        output_file_suffix: "memory_1k_write_seq_time_300sec_threads_2.prof"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=read, memory-access-mode=rnd, max-time=300, max-requests=0, num-threads=2"
         args:
-          run: "##OUTPUT_FILE## --test=fileio cleanup"
-          docker_run: "-v `pwd`:/root/results -v `pwd`/workdir:/root/workdir ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=fileio cleanup"
-        output_file_suffix: "fileio_cleanup.log"
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=2 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=read --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=2 run"
+        output_file_suffix: "memory_1k_read_rnd_time_300sec_threads_2.prof"
+      - desc: "Memory functions speed test: memory-block-size=1K, memory-oper=write, memory-access-mode=rnd, max-time=300, max-requests=0, num-threads=2"
+        args:
+          run: "##OUTPUT_FILE## --test=memory --memory-block-size=1K, --memory-oper=write --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=2 run"
+          docker_run: "-v `pwd`:/root/results ##CONTAINER_ID## /root/results/##OUTPUT_FILE## --test=memory --memory-block-size=1K --memory-oper=write --memory-access-mode=rnd --max-time=300 --max-requests=0 --num-threads=2 run"
+        output_file_suffix: "memory_1k_write_rnd_time_300sec_threads_2.prof"

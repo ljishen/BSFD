@@ -1,0 +1,6 @@
+---
+package_dependencies:
+  - name: gnuplot
+    benchmark: pmbw
+  - name: bc
+    benchmark: sysbench

@@ -1,18 +1,14 @@
 ---
-- name: kill obsolete scipy-notebook containers
-  docker:
-    image: "jupyter/scipy-notebook"
-    name: "{{ notebook_container_name }}"
-    state: killed
-
 - name: launch scipy-notebook container
-  docker:
+  docker_container:
     detach: True
     image: "jupyter/scipy-notebook"
     name: "{{ notebook_container_name }}"
-    ports:
+    published_ports:
       - "{{ container_public_port }}:8888"
-    pull: always
+    pull: true
+    restart: yes
+    force_kill: yes
     restart_policy: on-failure
     state: started
     volumes:

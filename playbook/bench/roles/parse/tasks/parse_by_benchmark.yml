@@ -2,12 +2,15 @@
 - name: get benchmark name
   set_fact: benchmark_name="{{ folder.path | basename }}"
 
-- name: install basic package
+- name: ({{ benchmark_name }}) install required package
   package:
-    name: gnuplot
+    name: "{{ dependency.name }}"
     state: latest
   become: yes
-  when: benchmark_name == "pmbw"
+  with_items: "{{ package_dependencies }}"
+  loop_control:
+    loop_var: dependency
+  when: benchmark_name == dependency.benchmark
 
 - name: ({{ benchmark_name }}) parse profiles by host
   include: parse_by_host.yml 
