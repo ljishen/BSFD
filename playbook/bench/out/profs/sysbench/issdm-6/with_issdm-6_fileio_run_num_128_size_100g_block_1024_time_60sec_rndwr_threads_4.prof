@@ -1,0 +1,45 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 4
+Initializing random number generator from current time
+
+
+Extra file open flags: 0
+128 files, 800MiB each
+100GiB total file size
+Block size 1KiB
+Number of IO requests: 0
+Read/Write ratio for combined random IO test: 1.50
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing random write test
+Initializing worker threads...
+
+Threads started!
+
+
+File operations:
+    reads/s:                      0.00
+    writes/s:                     56.60
+    fsyncs/s:                     71.40
+
+Throughput:
+    read, MiB/s:                  0.00
+    written, MiB/s:               0.06
+
+General statistics:
+    total time:                          60.0717s
+    total number of events:              3400
+    total time taken by event execution: 0.1124s
+    response time:
+         min:                                  0.01ms
+         avg:                                  0.03ms
+         max:                                 25.17ms
+         approx.  95 percentile:               0.02ms
+
+Threads fairness:
+    events (avg/stddev):           850.0000/353.56
+    execution time (avg/stddev):   0.0281/0.01
+

@@ -3,6 +3,7 @@
   file:
     path: "{{ remote_workdir }}/{{ benchmark.name }}"
     state: directory
+  become: True
 
 - name: ({{ benchmark.name }}) copy run.sh script to remote location
   copy:
@@ -22,3 +23,5 @@
   file:
     path: "{{ remote_workdir }}/{{ benchmark.name }}"
     state: absent
+  become: True
+  when: clean_workdir

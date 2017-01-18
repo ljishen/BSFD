@@ -1,0 +1,61 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 16
+Initializing random number generator from current time
+
+
+Extra file open flags: 0
+128 files, 800MiB each
+100GiB total file size
+Block size 1KiB
+Number of IO requests: 0
+Read/Write ratio for combined random IO test: 1.50
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing random read test
+Initializing worker threads...
+
+Threads started!
+
+FATAL: Failed to read file! file: 68 pos: 837926912 errno = 0 (Success)
+FATAL: Failed to read file! file: 90 pos: 838177792 errno = 0 (Success)
+FATAL: Failed to read file! file: 14 pos: 838743040 errno = 0 (Success)
+FATAL: Failed to read file! file: 103 pos: 837480448 errno = 0 (Success)
+FATAL: Failed to read file! file: 62 pos: 838132736 errno = 0 (Success)
+FATAL: Failed to read file! file: 94 pos: 838321152 errno = 0 (Success)
+FATAL: Failed to read file! file: 47 pos: 837144576 errno = 0 (Success)
+FATAL: Failed to read file! file: 60 pos: 835212288 errno = 0 (Success)
+FATAL: Failed to read file! file: 60 pos: 838038528 errno = 0 (Success)
+FATAL: Failed to read file! file: 46 pos: 837939200 errno = 0 (Success)
+FATAL: Failed to read file! file: 105 pos: 837428224 errno = 0 (Success)
+FATAL: Failed to read file! file: 56 pos: 838175744 errno = 0 (Success)
+FATAL: Failed to read file! file: 17 pos: 838581248 errno = 0 (Success)
+FATAL: Failed to read file! file: 101 pos: 837774336 errno = 0 (Success)
+FATAL: Failed to read file! file: 112 pos: 834019328 errno = 0 (Success)
+FATAL: Failed to read file! file: 82 pos: 837673984 errno = 0 (Success)
+
+File operations:
+    reads/s:                      62975.72
+    writes/s:                     0.00
+    fsyncs/s:                     0.00
+
+Throughput:
+    read, MiB/s:                  61.50
+    written, MiB/s:               0.00
+
+General statistics:
+    total time:                          0.1573s
+    total number of events:              9908
+    total time taken by event execution: 0.1747s
+    response time:
+         min:                                  0.00ms
+         avg:                                  0.02ms
+         max:                                  1.04ms
+         approx.  95 percentile:               0.03ms
+
+Threads fairness:
+    events (avg/stddev):           619.2500/780.49
+    execution time (avg/stddev):   0.0109/0.01
+

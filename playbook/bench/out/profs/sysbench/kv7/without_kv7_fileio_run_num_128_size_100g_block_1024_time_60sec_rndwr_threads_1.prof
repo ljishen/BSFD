@@ -8,38 +8,38 @@ Initializing random number generator from current time
 Extra file open flags: 0
 128 files, 800MiB each
 100GiB total file size
-Block size 16KiB
+Block size 1KiB
 Number of IO requests: 0
 Read/Write ratio for combined random IO test: 1.50
 Periodic FSYNC enabled, calling fsync() each 100 requests.
 Calling fsync() at the end of test, Enabled.
 Using synchronous I/O mode
-Doing random r/w test
+Doing random write test
 Initializing worker threads...
 
 Threads started!
 
 
 File operations:
-    reads/s:                      51.92
-    writes/s:                     34.61
-    fsyncs/s:                     110.50
+    reads/s:                      0.00
+    writes/s:                     44.98
+    fsyncs/s:                     56.43
 
 Throughput:
-    read, MiB/s:                  0.81
-    written, MiB/s:               0.54
+    read, MiB/s:                  0.00
+    written, MiB/s:               0.04
 
 General statistics:
-    total time:                          300.0106s
-    total number of events:              25961
-    total time taken by event execution: 179.6340s
+    total time:                          60.0243s
+    total number of events:              2700
+    total time taken by event execution: 0.1072s
     response time:
          min:                                  0.01ms
-         avg:                                  6.92ms
-         max:                                 40.45ms
-         approx.  95 percentile:              18.98ms
+         avg:                                  0.04ms
+         max:                                 37.17ms
+         approx.  95 percentile:               0.04ms
 
 Threads fairness:
-    events (avg/stddev):           25961.0000/0.00
-    execution time (avg/stddev):   179.6340/0.00
+    events (avg/stddev):           2700.0000/0.00
+    execution time (avg/stddev):   0.1072/0.00
 

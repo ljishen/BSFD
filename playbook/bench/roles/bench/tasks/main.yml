@@ -16,3 +16,5 @@
   file:
     path: "{{ remote_workdir }}"
     state: absent
+  become: True
+  when: clean_workdir

@@ -69,9 +69,21 @@ prt "$desc" "$base_res" "$res" "$3"
 
 
 # calculate BW in MiB/s
-kw='written, MiB/s:'
-base_res=`grep -oP "$(pt "$kw")"  $1`
-res=`grep -oP "$(pt "$kw")" $2`
+if [[ $opts == *"_seqwr_"* ]] || [[ $opts == *"_rndwr_"* ]]; then
+    kw='written, MiB/s:'
+elif [[ $opts == *"_seqrd_"* ]] || [[ $opts == *"_rndrd_"* ]]; then
+    kw='read, MiB/s:'
+fi
 
-desc='bw_mib_per_sec'
-prt "$desc" "$base_res" "$res" "$3"
+# The proper way to check if a variable is set
+# http://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
+if [ ! -z "${kw+x}" ]; then
+    base_res=`grep -oP "$(pt "$kw")"  $1`
+    res=`grep -oP "$(pt "$kw")" $2`
+
+    desc='bw_mib_per_sec'
+    prt "$desc" "$base_res" "$res" "$3"
+else
+    echo "Unsupported file-test-mode, it must be one of {seqwr, seqrd, rndrd, rndwr}" 1>&2    
+    exit 1
+fi

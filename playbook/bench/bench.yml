@@ -27,16 +27,18 @@
       raw: sudo dnf -y install python2-dnf libselinux-python ntp
       when: ansible_distribution == 'Fedora' and ansible_distribution_major_version|int >= 23
 
-- hosts: docker_compatible
+- hosts:
+    - docker_compatible
+    - localhost
   become: True
   roles:
-    - { role: angstwad.docker_ubuntu, pip_install_docker_compose: false, update_docker_package: yes }
+    - { role: angstwad.docker_ubuntu, pip_install_docker_compose: false, update_docker_package: yes, when: update_docker }
 
 - name: run benchmark
   hosts: all
   gather_facts: false
   roles:
-    - bench
+    - { role: bench, when: run_bench }
 
 - name: parse benchmark result profiles
   hosts: localhost
