@@ -1,0 +1,75 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 32
+Initializing random number generator from current time
+
+
+Extra file open flags: 3
+128 files, 400MiB each
+50GiB total file size
+Block size 1MiB
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing sequential read test
+Initializing worker threads...
+
+Threads started!
+
+FATAL: Failed to read file! file: 11 pos: 241172480 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 242221056 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 243269632 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 244318208 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 245366784 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 246415360 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 247463936 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 248512512 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 249561088 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 250609664 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 251658240 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 252706816 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 253755392 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 254803968 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 255852544 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 256901120 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 257949696 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 258998272 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 260046848 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 261095424 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 262144000 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 263192576 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 264241152 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 265289728 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 266338304 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 267386880 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 268435456 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 269484032 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 270532608 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 271581184 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 272629760 errno = 0 (Success)
+FATAL: Failed to read file! file: 11 pos: 273678336 errno = 0 (Success)
+
+File operations:
+    reads/s:                      64.26
+    writes/s:                     0.00
+    fsyncs/s:                     0.00
+
+Throughput:
+    read, MiB/s:                  64.26
+    written, MiB/s:               0.00
+
+General statistics:
+    total time:                          53.3800s
+    total number of events:              3430
+    total time taken by event execution: 1700.0547s
+    response time:
+         min:                                 16.47ms
+         avg:                                495.64ms
+         max:                              11837.97ms
+         approx.  95 percentile:            1938.89ms
+
+Threads fairness:
+    events (avg/stddev):           107.1875/77.27
+    execution time (avg/stddev):   53.1267/0.15
+

@@ -8,13 +8,15 @@ This playbook has three roles:
 - **show** - get ready to visualize all benchmark results by launching a scipy-notebook docker container
 
 #### Usage
-Install roles included in requirements.yml
+1. Install roles included in requirements.yml
+    ```bash
+    ansible-galaxy install -r requirements.yml
+    ```
+1. This playbook contains file I/O benchmarks by default. Please ensure,
+    - Your Docker storage driver is on top of a storage device with CFQ (Completely Fair Queuing) scheduler. See [1](http://unix.stackexchange.com/questions/69300/cgroups-blkio-weight-doesnt-seem-to-have-the-expected-effect), [2](https://www.cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk/) if you don't know how to check or change.
+    - The drive write-caching (write-back caching) setting is same. See [here](http://www.linux-magazine.com/Online/Features/Tune-Your-Hard-Disk-with-hdparm).
 
-```bash
-ansible-galaxy install -r requirements.yml
-```
-
-Check all the hosts in the inventory file (hosts), then
-```bash
-ansible-playbook --forks=1 bench.yml
-```
+1. Check all the hosts in the inventory file (hosts), then
+    ```bash
+    ansible-playbook --forks=1 bench.yml
+    ```
