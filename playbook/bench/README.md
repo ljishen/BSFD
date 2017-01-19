@@ -7,7 +7,7 @@ This playbook has three roles:
 - **parse** - parse all result profiles and merge them into a CSV file by using each `parse.sh` script in the benchmark folder.
 - **show** - get ready to visualize all benchmark results by launching a scipy-notebook docker container
 
-#### Usage
+### Usage
 1. Install roles included in requirements.yml
     ```bash
     ansible-galaxy install -r requirements.yml
