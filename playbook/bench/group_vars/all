@@ -7,4 +7,4 @@ iperf3_server: issdm-10
 # for debug
 run_bench: true
 update_docker: false
-clean_workdir: false
+clean_workdir: true

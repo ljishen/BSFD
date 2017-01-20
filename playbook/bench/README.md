@@ -14,8 +14,8 @@ This playbook has three roles:
     ```
 
 1. This playbook contains file I/O benchmarks by default. Please ensure,
-    - Your **Docker storage driver** is on top of a storage device with **CFQ (Completely Fair Queuing) scheduler**. See [1](http://unix.stackexchange.com/questions/69300/cgroups-blkio-weight-doesnt-seem-to-have-the-expected-effect), [2](https://www.cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk/) if you don't know how to check or change.
-    - The **drive write-caching (write-back caching)** setting is same. See [here](http://www.linux-magazine.com/Online/Features/Tune-Your-Hard-Disk-with-hdparm).
+    - On docker compatible hosts, the **workdir**(see `hosts`) is on a storage device with **CFQ (Completely Fair Queuing) scheduler**. See [1](http://unix.stackexchange.com/questions/69300/cgroups-blkio-weight-doesnt-seem-to-have-the-expected-effect), [2](https://www.cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk/) if you don't know how to check or change.
+    - You can disable the **drive write-caching (write-back caching)** on all of the hosts as long as this setting is the same in order to make a fair comparison. See [here](http://www.linux-magazine.com/Online/Features/Tune-Your-Hard-Disk-with-hdparm).
 
 1. Check all the hosts in the inventory file (hosts), then
     ```bash

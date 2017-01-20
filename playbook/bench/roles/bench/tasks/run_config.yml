@@ -1,0 +1,32 @@
+---
+- block:
+  - name: ({{ benchmark.name }}) construct docker container name
+    set_fact:
+      container_name: "bsfd_{{ benchmark.name }}"
+
+  - name: ({{ benchmark.name }}) kill any obsolete containers
+    docker_container:
+      name: "{{ container_name }}"
+      state: absent
+      force_kill: yes
+
+  - name: ({{ benchmark.name }}) set facts for docker compatible machine
+    set_fact:
+      limits: with
+      comm_prefix: "docker run --rm"
+      args: "{{ config.args.docker_run | regex_replace('##CONTAINER_ID##', '--name ' + container_name + ' ' + benchmark.docker_image ) }}"
+
+  - include: run_command.yml
+
+  when: inventory_hostname in groups['docker_compatible'] and config.args.docker_run is defined
+
+- block:
+  - name: ({{ benchmark.name }}) set facts for docker incompatible machine
+    set_fact:
+      limits: without
+      comm_prefix: "yes | ./run.sh"
+      args: "{{ config.args.run }}"
+
+  - include: run_command.yml
+
+  when: inventory_hostname in groups['docker_incompatible'] and config.args.run is defined

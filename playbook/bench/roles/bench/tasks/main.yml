@@ -6,7 +6,7 @@
    - "bench_configs_default.yml"
 
 - name: loop all benchmarks
-  include: run.yml
+  include: run_benchmark.yml
   with_items: "{{ benchmarks }}"
   loop_control:
     loop_var: benchmark

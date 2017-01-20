@@ -1,0 +1,96 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 64
+Initializing random number generator from current time
+
+
+Extra file open flags: 3
+128 files, 64MiB each
+8GiB total file size
+Block size 1MiB
+Number of IO requests: 0
+Read/Write ratio for combined random IO test: 1.50
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing random read test
+Initializing worker threads...
+
+Threads started!
+
+FATAL: Failed to read file! file: 96 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 91 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 109 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 121 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 36 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 77 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 123 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 56 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 117 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 75 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 80 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 99 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 111 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 121 pos: 63963136 errno = 0 (Success)
+FATAL: Failed to read file! file: 91 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 80 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 125 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 56 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 117 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 73 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 62 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 29 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 36 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 62 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 56 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 117 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 36 pos: 65011712 errno = 0 (Success)
+(last message repeated 1 times)
+FATAL: Failed to read file! file: 111 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 73 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 92 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 113 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 120 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 103 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 117 pos: 63963136 errno = 0 (Success)
+FATAL: Failed to read file! file: 121 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 99 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 122 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 54 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 122 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 54 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 120 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 117 pos: 63963136 errno = 0 (Success)
+FATAL: Failed to read file! file: 73 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 122 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 45 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 111 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 71 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 73 pos: 65011712 errno = 0 (Success)
+FATAL: Failed to read file! file: 71 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 68 pos: 65011712 errno = 0 (Success)
+
+File operations:
+    reads/s:                      156.37
+    writes/s:                     0.00
+    fsyncs/s:                     0.00
+
+Throughput:
+    read, MiB/s:                  156.37
+    written, MiB/s:               0.00
+
+General statistics:
+    total time:                          60.1380s
+    total number of events:              9404
+    total time taken by event execution: 2156.0688s
+    response time:
+         min:                                  0.43ms
+         avg:                                229.27ms
+         max:                               4888.05ms
+         approx.  95 percentile:            1017.79ms
+
+Threads fairness:
+    events (avg/stddev):           146.9375/113.62
+    execution time (avg/stddev):   33.6886/21.55
+

@@ -1,0 +1,27 @@
+---
+- name: ({{ benchmark.name }}) ensure workdir exists
+  file:
+    path: "{{ remote_workdir }}/{{ benchmark.name }}"
+    state: directory
+  become: True
+
+- name: ({{ benchmark.name }}) copy run.sh script to remote location
+  copy:
+    dest: "{{ remote_workdir }}/{{ benchmark.name }}/run.sh"
+    force: yes
+    mode: 0755
+    src: ../../benchmarks/{{ benchmark.name }}/run.sh
+  when: inventory_hostname in groups['docker_incompatible']
+
+- name: ({{ benchmark.name }}) run {{ benchmark.desc }}
+  include: run_config.yml
+  with_items: "{{ benchmark.configs }}"
+  loop_control:
+    loop_var: config
+
+- name: ({{ benchmark.name }}) clean remote workdir
+  file:
+    path: "{{ remote_workdir }}/{{ benchmark.name }}"
+    state: absent
+  become: True
+  when: clean_workdir

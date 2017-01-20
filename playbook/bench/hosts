@@ -1,6 +1,13 @@
 [docker_compatible]
-# dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
+#dexter.soe.ucsc.edu     ansible_ssh_user=ljishen
 issdm-6                 ansible_ssh_user=issdm
 
 [docker_incompatible]
 kv7                     ansible_ssh_user=root   base=True
+
+[docker_compatible:vars]
+remote_workdir=/tmp/BSFD
+
+[docker_incompatible:vars]
+#remote_workdir=/indexdb/BSFD    # SSD
+remote_workdir=/mnt/vol/BSFD   # HDD

@@ -1,0 +1,47 @@
+sysbench 1.0:  multi-threaded system evaluation benchmark
+
+Running the test with following options:
+Number of threads: 2
+Initializing random number generator from current time
+
+
+Extra file open flags: 3
+128 files, 64MiB each
+8GiB total file size
+Block size 1MiB
+Number of IO requests: 0
+Read/Write ratio for combined random IO test: 1.50
+Periodic FSYNC enabled, calling fsync() each 100 requests.
+Calling fsync() at the end of test, Enabled.
+Using synchronous I/O mode
+Doing random read test
+Initializing worker threads...
+
+Threads started!
+
+FATAL: Failed to read file! file: 105 pos: 66060288 errno = 0 (Success)
+FATAL: Failed to read file! file: 108 pos: 66060288 errno = 0 (Success)
+
+File operations:
+    reads/s:                      47.75
+    writes/s:                     0.00
+    fsyncs/s:                     0.00
+
+Throughput:
+    read, MiB/s:                  47.75
+    written, MiB/s:               0.00
+
+General statistics:
+    total time:                          32.6256s
+    total number of events:              1558
+    total time taken by event execution: 54.2006s
+    response time:
+         min:                                  0.47ms
+         avg:                                 34.79ms
+         max:                                188.27ms
+         approx.  95 percentile:              51.07ms
+
+Threads fairness:
+    events (avg/stddev):           779.0000/258.00
+    execution time (avg/stddev):   27.1003/5.52
+

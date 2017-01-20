@@ -1,0 +1,28 @@
+---
+- name: ({{ benchmark.name }}) construct output file name
+  set_fact: output_file_name="{{ limits }}_{{ inventory_hostname }}_{{ config.output_file_suffix }}"
+
+- name: ({{ benchmark.name }}) construct execution command
+  set_fact: cmd="{{ comm_prefix }} {{ args | regex_replace('##OUTPUT_FILE##', output_file_name ) }}"
+
+- name: ({{ benchmark.name }}) show execution command
+  debug: msg="{{ cmd }}"
+
+- name: ({{ benchmark.name }}) run {{ config.desc }}
+  shell: "{{ cmd }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ remote_workdir }}/{{ benchmark.name }}"
+  environment:
+    PATH: /usr/local/bin:/usr/bin:/bin
+  ignore_errors: "{{ benchmark.ignore_errors | default(False) }}"
+
+- name: ({{ benchmark.name }}) remove obsolete local profile
+  local_action: file path="{{ local_profs_dir }}/{{ benchmark.name }}/{{ inventory_hostname }}/{{ output_file_name }}" state=absent
+
+- name: ({{ benchmark.name }}) collect output profile
+  fetch:
+    dest: "{{ local_profs_dir }}/{{ benchmark.name }}/{{ inventory_hostname }}/"
+    flat: yes
+    fail_on_missing: yes
+    src: "{{ remote_workdir }}/{{ benchmark.name }}/{{ output_file_name }}"
