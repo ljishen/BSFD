@@ -32,10 +32,10 @@ if [ ! -f $FOLDER_NAME/interbench ]; then
     done
 fi
 
-echo -e "This execution performs real time scheduling benchmarks and uses cpu load of 1 with burn load.\n"
+echo -e "The default execution performs real time scheduling benchmarks and uses cpu load of 4 with burn load.\n"
 
 mkdir -p $(dirname $1)
-$FOLDER_NAME/interbench -L 1 -c -r ${@:2} | tee $1
+$FOLDER_NAME/interbench -c -r ${@:2} | tee $1
 
 LOOPS_PER_MS=interbench.loops_per_ms
 if [ -f $LOOPS_PER_MS ]; then

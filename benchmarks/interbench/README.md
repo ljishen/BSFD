@@ -38,4 +38,4 @@ Recommend to run as root and set -L to number of CPUs on the system
 
 The default execution performs real time scheduling benchmarks and uses cpu load of 1 with burn load.
 
-See [Homepage](https://github.com/ckolivas/interbench) of The Linux Interactivity Benchmark for more details.
+See [Homepage](http://users.tpg.com.au/ckolivas/interbench/) and [Github source](https://github.com/ckolivas/interbench) of The Linux Interactivity Benchmark for more details.
