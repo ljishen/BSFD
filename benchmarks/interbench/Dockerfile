@@ -1,4 +1,4 @@
-# VERSION 1.1
+# VERSION 1.2
 
 FROM ubuntu:latest
 
@@ -13,7 +13,7 @@ RUN apt-get update \
 ENV FOLDER_NAME interbench
 
 WORKDIR /root
-RUN wget https://github.com/Mustaavalkosta/interbench/archive/master.zip \
+RUN wget https://github.com/ckolivas/interbench/archive/master.zip \
     && unzip master.zip \
     && rm master.zip \
     && mv interbench-master $FOLDER_NAME
