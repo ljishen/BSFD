@@ -1,24 +1,18 @@
-# VERSION 1.1
+# VERSION 1.2
 
-FROM phusion/baseimage:0.9.19
-
+FROM phusion/baseimage:0.10.1
 MAINTAINER Jianshen Liu <jliu120@ucsc.edu>
 
-RUN apt-get update \
-    && apt-get install -y \
-        build-essential \
-        wget
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential
 
 ENV FOLDER_NAME iperf
-ENV VERSION 3.1.3
+ENV VERSION 3.5
 
-WORKDIR /root
-RUN wget https://github.com/esnet/iperf/archive/${VERSION}.tar.gz \
-    && tar -xf ${VERSION}.tar.gz \
-    && rm ${VERSION}.tar.gz
+RUN curl -fsSL https://codeload.github.com/esnet/iperf/tar.gz/"${VERSION}" | tar -xz -C /root
 
-WORKDIR ${FOLDER_NAME}-${VERSION}
-RUN ./configure; make
+WORKDIR /root/"${FOLDER_NAME}"-"${VERSION}"
+RUN ./configure; make -j"$(nproc)"
 
 # Clean Up
 RUN apt-get clean \

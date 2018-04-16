@@ -1,11 +1,13 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+
+set -eu
 
 if [ "$#" -lt 2 ]; then
     cat <<-ENDOFMESSAGE
 Please specify at least the output file and mode (server/client).
 Usage: ./run.sh <output file> [-s|-c host] [options]
 
-You can use "./run.sh <output file> --help" show a help synopsis. 
+You can use "./run.sh <output file> --help" show a help synopsis.
 
 Examples:
 # Run a test in client mode, connecting to an iPerf server running on host (c),
@@ -21,17 +23,18 @@ ENDOFMESSAGE
 fi
 
 FOLDER_NAME=${FOLDER_NAME:-iperf}
-VERSION=${VERSION:-3.1.3}
-if [ ! -f ${FOLDER_NAME}-${VERSION}/src/iperf3 ]; then
+VERSION=${VERSION:-3.5}
+if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
     while true; do
-        read -p "Do you wish to install iperf3 (Version $VERSION)? [y/n] " yn
+        read -rp "Do you wish to install iperf3 (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget https://github.com/esnet/iperf/archive/${VERSION}.tar.gz
-                tar -xf ${VERSION}.tar.gz
-                rm ${VERSION}.tar.gz
-                cd ${FOLDER_NAME}-${VERSION}
-                ./configure; make
+                # Pipelining the output from wget to zip is not easy.
+                # See https://serverfault.com/a/589528
+                # So, we use .tar.gz file instead
+                wget -c https://codeload.github.com/esnet/iperf/tar.gz/"$VERSION" -O - | tar -xz
+                cd "${FOLDER_NAME}"-"${VERSION}"
+                ./configure; make -j"$(nproc)"
                 cd ..
                 echo "Successfully installed ${FOLDER_NAME}."
                 break
@@ -46,6 +49,8 @@ if [ ! -f ${FOLDER_NAME}-${VERSION}/src/iperf3 ]; then
     done
 fi
 
+# Clean up the old output file
 rm -f "$1"
-mkdir -p $(dirname "$1")
-${FOLDER_NAME}-${VERSION}/src/iperf3 --verbose --affinity 1 --format m --logfile "$1" "${@:2}"
+
+mkdir -p "$(dirname "$1")"
+"${FOLDER_NAME}"-"${VERSION}"/src/iperf3 --verbose --affinity 1 --format m --logfile "$1" "${@:2}"
