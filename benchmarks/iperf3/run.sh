@@ -34,7 +34,7 @@ if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
                 # So, we use .tar.gz file instead
                 wget -c https://codeload.github.com/esnet/iperf/tar.gz/"$VERSION" -O - | tar -xz
                 cd "${FOLDER_NAME}"-"${VERSION}"
-                ./configure; make -j"$(nproc)"
+                ./configure && make -j"$(nproc)"
                 cd ..
                 echo "Successfully installed ${FOLDER_NAME}."
                 break

@@ -1,8 +1,10 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+
+set -eu
 
 if [ "$#" -lt 2 ] || ([ "$1" != "pmbw" ] && [ "$1" != "stats2gnuplot" ]); then
     cat <<-ENDOFMESSAGE
-Please specify the program name and the output file (-n) as arguments.
+Please specify the program name and the stats file as arguments.
 Usage: ./run.sh <pmbw|stats2gnuplot> <stats file> [options]
 Options:
   -f <match>     Run only benchmarks containing this substring, can be used multile times. Try "list".
@@ -16,24 +18,24 @@ Options:
 
 Examples:
 ./run.sh pmbw stats.prof -S 0
-./run stats2gnuplot stats.prof
+./run.sh stats2gnuplot stats.prof
 ENDOFMESSAGE
     exit
 fi
 
 FOLDER_NAME=${FOLDER_NAME:-pmbw}
-VERSION=${VERSION:-4a3b377}
-if [ ! -f $FOLDER_NAME/pmbw ]; then
+VERSION=${VERSION:-fc71268}
+if [ ! -f "$FOLDER_NAME"/pmbw ]; then
     while true; do
-        read -p "Do you wish to install pmbw (Version $VERSION)? [y/n] " yn
+        read -rp "Do you wish to install pmbw (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
-                wget -O ${VERSION}.zip https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pmbw/${VERSION}.zip
-                unzip -qo ${VERSION}.zip
-                rm ${VERSION}.zip
-                mv pmbw-master $FOLDER_NAME
-                cd $FOLDER_NAME
-                chmod +x configure && ./configure && make
+                wget https://codeload.github.com/bingmann/pmbw/zip/"${VERSION}" && \
+                    unzip -qo "${VERSION}" && \
+                    rm "${VERSION}" && \
+                    mv pmbw-"${VERSION}" "$FOLDER_NAME"
+                cd "$FOLDER_NAME"
+                ./configure && make -j"$(nproc)"
                 cd ..
                 echo "Successfully installed ${FOLDER_NAME}."
                 break
@@ -48,19 +50,33 @@ if [ ! -f $FOLDER_NAME/pmbw ]; then
     done
 fi
 
-if [ "$1" == "pmbw" ]; then
-    mkdir -p "$(dirname $2)"
-    $FOLDER_NAME/$1 "${@:3}" | tee "$2"
-    rm stats.txt
-else
-    $FOLDER_NAME/"$1" "$2" | gnuplot
+OUTPUT="$2"
 
-    # copy the plots-<host>.pdf to the same dir as the stats file
-    script_path=`dirname $(readlink -f $0)`
-    stats_file_path=`dirname $(readlink -f $2)`
+if [ "$1" == "pmbw" ]; then
+    mkdir -p "$(dirname "$OUTPUT")"
+
+    ORIG_OUTPUT="stats.txt"
+    function clean_up {
+        if [ -f "$ORIG_OUTPUT" ]; then
+            mv "$ORIG_OUTPUT" "$OUTPUT"
+        fi
+        exit $?
+    }
+
+    # Trap the exit signal
+    # See https://raymii.org/s/snippets/Bash_Bits_Trap_Control_C_SIGTERM.html
+    trap clean_up SIGINT
+    trap clean_up SIGTERM
+
+    "$FOLDER_NAME"/"$1" "${@:3}" && mv "$ORIG_OUTPUT" "$OUTPUT"
+else
+    "$FOLDER_NAME"/"$1" "$OUTPUT" | gnuplot
+
+    # Copy the plots-<host>.pdf to the same dir as the stats file
+    script_path=$(dirname "$(readlink -f "$0")")
+    stats_file_path=$(dirname "$(readlink -f "$OUTPUT")")
     if [ "${script_path}" != "${stats_file_path}" ]; then
-        host=`grep -oP -m1 "host=\K[^\s]+" "$2"`
-        cp plots-${host}.pdf "${stats_file_path}"
-        rm plots-${host}.pdf
+        host=$(grep -oP -m1 "host=\\K[^\\s]+" "$OUTPUT")
+        mv plots-"${host}".pdf "${stats_file_path}"
     fi
 fi

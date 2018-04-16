@@ -12,7 +12,7 @@ ENV VERSION 3.5
 RUN curl -fsSL https://codeload.github.com/esnet/iperf/tar.gz/"${VERSION}" | tar -xz -C /root
 
 WORKDIR /root/"${FOLDER_NAME}"-"${VERSION}"
-RUN ./configure; make -j"$(nproc)"
+RUN ./configure && make -j"$(nproc)"
 
 # Clean Up
 RUN apt-get clean \

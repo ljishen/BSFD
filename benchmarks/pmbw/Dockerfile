@@ -1,27 +1,26 @@
-# VERSION 1.0
+# VERSION 1.1
 
-FROM ubuntu:latest
-
+FROM phusion/baseimage:0.10.1
 MAINTAINER Jianshen Liu <jliu120@ucsc.edu>
 
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
         build-essential \
         unzip \
-        wget
+        wget \
+        gnuplot
 
-ENV VERSION 4a3b377
+ENV VERSION fc71268
 ENV FOLDER_NAME pmbw
 
 WORKDIR /root
-
-RUN wget https://raw.githubusercontent.com/ljishen/BSFD/master/benchmarks/pmbw/${VERSION}.zip \
-    && unzip ${VERSION}.zip \
-    && rm ${VERSION}.zip \
-    && mv pmbw-master $FOLDER_NAME
+RUN wget https://codeload.github.com/bingmann/pmbw/zip/"${VERSION}" && \
+        unzip -qo "${VERSION}" && \
+        rm "${VERSION}" && \
+        mv pmbw-"${VERSION}" "$FOLDER_NAME"
 
 WORKDIR /root/$FOLDER_NAME
-RUN chmod +x configure && ./configure && make
+RUN ./configure && make
 
 # Clean Up
 RUN apt-get clean \
@@ -29,4 +28,4 @@ RUN apt-get clean \
 
 WORKDIR /root
 COPY run.sh .
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["/sbin/my_init", "--skip-startup-files", "--quiet", "--", "./run.sh"]
