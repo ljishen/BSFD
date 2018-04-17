@@ -2,12 +2,12 @@
 
 set -eu
 
-if [ "$#" -lt 2 ]; then
+if [ "$#" -lt 2 ] || [[ "$1" == -* ]]; then
     cat <<-ENDOFMESSAGE
 Please specify at least the output file and mode (server/client).
 Usage: ./run.sh <output file> [-s|-c host] [options]
 
-You can use "./run.sh <output file> --help" show a help synopsis.
+You can use "./run.sh --help" to show a help synopsis.
 
 Examples:
 # Run a test in client mode, connecting to an iPerf server running on host (c),
@@ -17,7 +17,7 @@ Examples:
 ./run.sh output.prof --client iperf.he.net --interval 1 --time 20 --window 32m
 
 # Show a help synopsis and quit.
-./run.sh output.prof --help
+./run.sh --help
 ENDOFMESSAGE
     exit
 fi
@@ -53,4 +53,5 @@ fi
 rm -f "$1"
 
 mkdir -p "$(dirname "$1")"
-"${FOLDER_NAME}"-"${VERSION}"/src/iperf3 --verbose --affinity 1 --format m --logfile "$1" "${@:2}"
+printf "\\nSupplied Opertions: %s\\n\\n" "${@:2}"
+"${FOLDER_NAME}"-"${VERSION}"/src/iperf3 --verbose --logfile "$1" "${@:2}"
