@@ -63,5 +63,7 @@ fi
 rm -f "$1"
 
 mkdir -p "$(dirname "$1")"
-printf "\\nSupplied Opertions: %s\\n\\n" "${@:2}"
+printf "\\nSupplied Options: "
+echo "${@:2}"
+echo
 "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 --verbose --logfile "$1" "${@:2}"
