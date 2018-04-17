@@ -2,7 +2,10 @@
 
 set -eu
 
-if [ "$#" -lt 2 ] || [[ "$1" == -* ]]; then
+FOLDER_NAME=${FOLDER_NAME:-iperf}
+VERSION=${VERSION:-3.5}
+
+if [ "$#" -lt 1 ] || [[ "$1" == --* ]]; then
     cat <<-ENDOFMESSAGE
 Please specify at least the output file and mode (server/client).
 Usage: ./run.sh <output file> [-s|-c host] [options]
@@ -19,11 +22,18 @@ Examples:
 # Show a help synopsis and quit.
 ./run.sh --help
 ENDOFMESSAGE
+
+    if [ -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
+        printf "\\n\\n"
+        echo "-------------------------------------------------------"
+        echo "                Inherited Help Synopsis"
+        echo "-------------------------------------------------------"
+        echo
+        "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 -h
+    fi
     exit
 fi
 
-FOLDER_NAME=${FOLDER_NAME:-iperf}
-VERSION=${VERSION:-3.5}
 if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
     while true; do
         read -rp "Do you wish to install iperf3 (Version $VERSION)? [y/n] " yn
