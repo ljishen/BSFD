@@ -66,4 +66,4 @@ mkdir -p "$(dirname "$1")"
 printf "\\nSupplied Options: "
 echo "${@:2}"
 echo
-"${FOLDER_NAME}"-"${VERSION}"/src/iperf3 --verbose --logfile "$1" "${@:2}"
+"${FOLDER_NAME}"-"${VERSION}"/src/iperf3 "${@:2}" 2>&1 | tee "$1"
