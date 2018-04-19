@@ -5,7 +5,7 @@ set -eu
 FOLDER_NAME=${FOLDER_NAME:-iperf}
 VERSION=${VERSION:-3.5}
 
-if [ "$#" -lt 1 ] || [[ "$1" == --* ]]; then
+if [ "$#" -eq 0 ] || [[ "$1" == --[^i]* ]]; then
     cat <<-ENDOFMESSAGE
 Please specify at least the output file and mode (server/client).
 Usage: ./run.sh <output file> [-s|-c host] [options]
@@ -16,11 +16,14 @@ Examples:
 # Run a test in client mode, connecting to an iPerf server running on host (c),
 # with report made every other second of the bandwidth (i),
 # repeatedly sent an array of bytes for 20 seconds (t),
-# and with a 32m TCP buffer (w).
+# using a 32m TCP buffer (w).
 ./run.sh output.prof --client iperf.he.net --interval 1 --time 20 --window 32m
 
-# Show a help synopsis and quit.
+# Show a help synopsis and quit
 ./run.sh --help
+
+# To just install the iPerf 3 in the current directory, use
+./run.sh --install
 ENDOFMESSAGE
 
     if [ -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
@@ -57,6 +60,10 @@ if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
                 ;;
         esac
     done
+fi
+
+if [[ "$1" == --i* ]]; then
+    exit
 fi
 
 # Clean up the old output file
