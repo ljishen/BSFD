@@ -39,7 +39,7 @@ fi
 
 if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
     while true; do
-        read -rp "Do you wish to install iperf3 (Version $VERSION)? [y/n] " yn
+        read -rp "Do you want to install iPerf 3 (Version $VERSION)? [y/n] " yn
         case $yn in
             [Yy]* )
                 # Pipelining the output from wget to zip is not easy.
@@ -49,7 +49,7 @@ if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
                 cd "${FOLDER_NAME}"-"${VERSION}"
                 ./configure && make -j"$(nproc)"
                 cd ..
-                echo "Successfully installed ${FOLDER_NAME}."
+                echo "Successfully installed iPerf 3."
                 break
                 ;;
             [Nn]* )
@@ -60,6 +60,8 @@ if [ ! -f "${FOLDER_NAME}"-"${VERSION}"/src/iperf3 ]; then
                 ;;
         esac
     done
+elif [[ "$1" == --i* ]]; then
+    echo "iPerf 3 is already installed."
 fi
 
 if [[ "$1" == --i* ]]; then
