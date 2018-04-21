@@ -8,7 +8,7 @@ VERSION=${VERSION:-3.5}
 if [ "$#" -eq 0 ] || [[ "$1" == --[^i]* ]]; then
     cat <<-ENDOFMESSAGE
 Please specify at least the output file and mode (server/client).
-Usage: ./run.sh <output file> [-s|-c host] [options]
+Usage: ./run.sh FILE [-s|-c host] [options]
 
 You can use "./run.sh --help" to show a help synopsis.
 
